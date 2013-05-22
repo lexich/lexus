@@ -21,8 +21,8 @@
 }
 
 .ui_mainmenu{
-  padding: 1px 0;
-  height: @menu-height + 1;
+  padding: 1px 0 1px 1px;
+  height: @menu-height + 2;
   background: @menu-passive-bgcolor;
   top: 10px;
 }
@@ -35,7 +35,7 @@
       line-height: @menu-height;
       background: @menu-passive-bgcolor;
       color: @menu-passive-color;
-      border-left: 1px solid @darkGreyL;
+      border-right: 1px solid @darkGreyL;
       &:hover {
         background: @menu-active-bgcolor;
         color: @menu-active-color;
@@ -50,7 +50,7 @@
 //////////////
 
 .ui_preloader {
-  //display: none; //delete
+  display: none; //delete
   width: 100%;
   height: 100%;
   top: 0;

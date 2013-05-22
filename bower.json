@@ -11,6 +11,7 @@
     "javascript-libs":"https://github.com/lexich/javascript-libs.git",
     "jquery.transit":"*",
     "requirejs":"*",
-    "foundation":"http://foundation.zurb.com/files/foundation-4.1.6.zip"
+    "foundation":"http://foundation.zurb.com/files/foundation-4.1.6.zip",
+    "font-awesome":"*"
   }
 }

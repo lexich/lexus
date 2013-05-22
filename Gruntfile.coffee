@@ -75,6 +75,20 @@ module.exports = (grunt) ->
           cwd: "static/html/"
           dest: "<%= resource.path %>/"
         ]
+      fontawesome:
+        files:[
+          flatten: true
+          expand: true
+          src: ["font-awesome.min.css","font-awesome-ie7.min.css"]
+          cwd: "<%= components %>/font-awesome/build/assets/font-awesome/css/"
+          dest: "<%= resource.css %>/"
+        ,
+          flatten: true
+          expand: true
+          src: "*"
+          cwd: "<%= components %>/font-awesome/build/assets/font-awesome/font/"
+          dest: "<%= resource.font %>/"
+        ]
 
     less:
       common:

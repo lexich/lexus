@@ -10,7 +10,7 @@ require [
     $shadow.animate {
       left:"+=#{$original.width()}"
     }, {
-      duration: 4000
+      duration: 2000
       complete: ->
         $shadow.parent("[data-js-preloader]").fadeOut(400)
         next()
