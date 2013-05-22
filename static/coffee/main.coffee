@@ -18,4 +18,14 @@ require [
 
   $(document).ready ->
     $("[data-js-scrollmenu] a").scrollPage()
+    $("[data-js-audio-change]").click (e)->
+      e.preventDefault()
+      $item = $(e.target)
+      $img = $item.find("img:first")
+      src = $img.attr("src")
+      change = $item.data("js-audio-change")
+      $img.attr("src", change)
+      $item.data("js-audio-change", src)
+
     preloader()
+

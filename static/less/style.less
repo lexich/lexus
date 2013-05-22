@@ -25,26 +25,30 @@
   height: @menu-height + 2;
   background: @menu-passive-bgcolor;
   top: 10px;
-}
-.ui_mainmenu .ui_mainmenu__section {
+  .ui_mainmenu__section {
 
-  ul li {
-    height: @menu-height;
-    a {
+    ul li {
       height: @menu-height;
-      line-height: @menu-height;
-      background: @menu-passive-bgcolor;
-      color: @menu-passive-color;
-      border-right: 1px solid @darkGreyL;
-      &:hover {
-        background: @menu-active-bgcolor;
-        color: @menu-active-color;
-        border-left-color: transparent;
+      a {
+        height: @menu-height;
+        line-height: @menu-height;
+        background: @menu-passive-bgcolor;
+        color: @menu-passive-color;
+        border-right: 1px solid @darkGreyL;
+        &:hover {
+          background: @menu-active-bgcolor;
+          color: @menu-active-color;
+          border-right-color: transparent;
+        }
+        &.ui_mainmenu__item, &.ui_mainmenu__item:hover{
+          background: @menu-passive-bgcolor;
+          color: @menu-passive-color;
+          border-right: 0;
+        }
       }
     }
   }
 }
-
 //////////////
 // preloader
 //////////////
