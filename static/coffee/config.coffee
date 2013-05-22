@@ -1,0 +1,13 @@
+require.config
+  baseUrl:"js"
+  paths:
+    "jQuery":"lib/jquery"
+  shim:
+    "jQuery":
+      exports:"jQuery"
+    "lib/foundation":
+      deps:["jQuery"]
+    "lib/jquery.scrollpage":
+      deps:["jQuery"]
+    "lib/jquery.transit":
+      deps:["jQuery"]

@@ -1,0 +1,87 @@
+@black: #000000;
+@white: #ffffff;
+@green: #008000;
+@darkGrey: #1d1f26;
+@darkGreyL: #3c3d41;
+//////////////
+//
+//////////////
+@menu-passive-bgcolor: @darkGrey;
+@menu-passive-color: @white;
+
+@menu-active-bgcolor: @white;
+@menu-active-color: @darkGrey;
+@menu-height: 60px;
+.ui_fixedmenu{
+  position: fixed;
+  width: 100%;
+  .ui_mainmenu{
+    margin: 0 50px;
+  }
+}
+
+.ui_mainmenu{
+  padding: 1px 0;
+  height: @menu-height + 1;
+  background: @menu-passive-bgcolor;
+  top: 10px;
+}
+.ui_mainmenu .ui_mainmenu__section {
+
+  ul li {
+    height: @menu-height;
+    a {
+      height: @menu-height;
+      line-height: @menu-height;
+      background: @menu-passive-bgcolor;
+      color: @menu-passive-color;
+      border-left: 1px solid @darkGreyL;
+      &:hover {
+        background: @menu-active-bgcolor;
+        color: @menu-active-color;
+        border-left-color: transparent;
+      }
+    }
+  }
+}
+
+//////////////
+// preloader
+//////////////
+
+.ui_preloader {
+  //display: none; //delete
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  background-color: @black;
+  .mixin_itemsize() {
+    position: fixed;
+    bottom: 300px;
+    left: 45%;
+  }
+}
+
+.ui_preloader__item {
+  background-color: transparent;
+  .ui_preloader > .mixin_itemsize();
+}
+
+.ui_preloader__shadow {
+  opacity: 0.5;
+  background-color: @black;
+  width: 100%;
+  height: 100%;
+  .ui_preloader > .mixin_itemsize();
+}
+
+
+.ui_page{
+
+}
+.ui_page__content{
+  height: 500px;
+  border: 1px solid @black;
+}
