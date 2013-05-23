@@ -3,6 +3,12 @@
 @green: #008000;
 @darkGrey: #1d1f26;
 @darkGreyL: #3c3d41;
+
+body{
+  background-color: #090c13;
+}
+
+
 //////////////
 //
 //////////////
@@ -127,26 +133,41 @@
 // layer
 /////////////////
 @offset-left-2-3:-230px;
+@layer-width:1920px;
 .ui_layer{
+  width: 100%;
+  display: block;
   top: 0;
-  left: 0;
-  position: absolute;
+  left: 0
+}
+.ui_layer__base{
+  max-width: 1265px;
+  width: 100%;
+  margin: auto;
+  display: block;
+  overflow: hidden;
+}
+.ui_layer__base-group{
+  margin-top: -2092px;
 }
 .ui_layer-1{
-  width: 1920px;
+  width: 100%;
+  max-width: 1266px;
   height: 2092px;
   background: #FCF5ED url("../img/layer_1.jpg") 0 0 no-repeat;
 
 }
 .ui_layer-2{
-  width: 1920px;
+  float: left;
+  width: @layer-width;
   height: 1657px;
   margin-top: -220px;
   margin-left: @offset-left-2-3;
   background: transparent url("../img/layer_2.png") 0 0 no-repeat;
 }
 .ui_layer-3{
-  width: 1920px;
+  float: left;
+  width: @layer-width;
   height: 3140px;
   margin-left: @offset-left-2-3;
   background: transparent url("../img/layer_3.jpg") 0 0 no-repeat;
