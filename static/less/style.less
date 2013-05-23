@@ -88,18 +88,25 @@
 }
 
 
-.ui_page{
 
-}
 .ui_page__content{
-  height: 500px;
-  border: 1px solid @black;
+  height: 1200px;
+  border: 1px solid @white;
+}
+
+.ui_content{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+
 }
 
 //////////////////
 // ui_car
 //////////////////
 .ui_car{
+  display: none;
   position: relative;
   top: 150px;
   left: 50px;
@@ -114,4 +121,33 @@
   width: 103px;
   height: 103px;
   background: url("../img/wheel.png");
+}
+
+/////////////////
+// layer
+/////////////////
+@offset-left-2-3:-230px;
+.ui_layer{
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+.ui_layer-1{
+  width: 1920px;
+  height: 2092px;
+  background: #FCF5ED url("../img/layer_1.jpg") 0 0 no-repeat;
+
+}
+.ui_layer-2{
+  width: 1920px;
+  height: 1657px;
+  margin-top: -220px;
+  margin-left: @offset-left-2-3;
+  background: transparent url("../img/layer_2.png") 0 0 no-repeat;
+}
+.ui_layer-3{
+  width: 1920px;
+  height: 3140px;
+  margin-left: @offset-left-2-3;
+  background: transparent url("../img/layer_3.jpg") 0 0 no-repeat;
 }
