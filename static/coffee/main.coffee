@@ -49,8 +49,11 @@ require [
       bottom = top + @$el.height()
       (wTop <= top and top <= wBottom) or (wTop <= bottom and bottom <= wBottom)
 
+    initialize:->
+      @movement = @options.movement ? @movement
+      @duration = @options.duration ? @duration
+
     render:->
-      console.log "render"
       if @isVisible()
         $wheels = $("[data-js-car-wheel]", @$el)
 
@@ -95,6 +98,13 @@ require [
     preloader = (new Preloader
       next:->
     ).render()
-    car = (new Car).render()
+
+    $car = $("[data-js-car]:first")
+    data = $car.data("js-car") ? {}
+    car = (new Car
+      el:$car
+      movement:data.movement
+      duration:data.duration
+    ).render()
 
 
