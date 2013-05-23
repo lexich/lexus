@@ -13,82 +13,87 @@ module.exports = (grunt) ->
 
 
     copy:
-      img:
-        files: [
-            flatten: true
-            expand: true
-            src: "*"
-            cwd: "static/img"
-            dest: "<%= resource.img %>/"
-        ]
-      jquery:
-        files: [
-          flatten: true
-          expand: true
-          src: "jquery.js"
-          cwd: "<%= components %>/jquery/"
-          dest: "<%= resource.js %>/lib/"
-        ]
-      requirejs:
-        files: [
-          flatten: true
-          expand: true
-          src: "require.js"
-          cwd: "<%= components %>/requirejs/"
-          dest: "<%= resource.js %>/lib/"
-        ]
-      jquerytransit:
-        files: [
-          flatten: true
-          expand: true
-          src: "jquery.transit.js"
-          cwd: "<%= components %>/jquery.transit/"
-          dest: "<%= resource.js %>/lib/"
-        ],
-      javascriptlibs:
-        files: [
-            flatten: true
-            expand: true
-            src: "jquery.scrollpage.js"
-            cwd: "<%= components %>/javascript-libs/"
-            dest: "<%= resource.js %>/lib/"
-        ],
-      foundation:
-        files:[
-          flatten: true
-          expand: true
-          src: "foundation.css"
-          cwd: "<%= components %>/foundation/css/"
-          dest: "<%= resource.css %>/"
-        ,
-          flatten: true
-          expand: true
-          src: "foundation.min.js"
-          cwd: "<%= components %>/foundation/js/"
-          dest: "<%= resource.js %>/lib/"
-        ],
-      html:
-        files:[
-          flatten: true
-          expand: true
-          src: "*.html"
-          cwd: "static/html/"
-          dest: "<%= resource.path %>/"
-        ]
-      fontawesome:
-        files:[
-          flatten: true
-          expand: true
-          src: ["font-awesome.min.css","font-awesome-ie7.min.css"]
-          cwd: "<%= components %>/font-awesome/build/assets/font-awesome/css/"
-          dest: "<%= resource.css %>/"
-        ,
-          flatten: true
-          expand: true
-          src: "*"
-          cwd: "<%= components %>/font-awesome/build/assets/font-awesome/font/"
-          dest: "<%= resource.font %>/"
-        ]
+      img: files: [
+        flatten: true
+        expand: true
+        src: "*"
+        cwd: "static/img"
+        dest: "<%= resource.img %>/"
+      ]
+      jquery: files: [
+        flatten: true
+        expand: true
+        src: "jquery.js"
+        cwd: "<%= components %>/jquery/"
+        dest: "<%= resource.js %>/lib/"
+      ]
+      requirejs: files: [
+        flatten: true
+        expand: true
+        src: "require.js"
+        cwd: "<%= components %>/requirejs/"
+        dest: "<%= resource.js %>/lib/"
+      ]
+      jquerytransit: files: [
+        flatten: true
+        expand: true
+        src: "jquery.transit.js"
+        cwd: "<%= components %>/jquery.transit/"
+        dest: "<%= resource.js %>/lib/"
+      ]
+      javascriptlibs: files: [
+        flatten: true
+        expand: true
+        src: "jquery.scrollpage.js"
+        cwd: "<%= components %>/javascript-libs/"
+        dest: "<%= resource.js %>/lib/"
+      ]
+      foundation: files:[
+        flatten: true
+        expand: true
+        src: "foundation.css"
+        cwd: "<%= components %>/foundation/css/"
+        dest: "<%= resource.css %>/"
+      ,
+        flatten: true
+        expand: true
+        src: "foundation.min.js"
+        cwd: "<%= components %>/foundation/js/"
+        dest: "<%= resource.js %>/lib/"
+      ]
+      html: files:[
+        flatten: true
+        expand: true
+        src: "*.html"
+        cwd: "static/html/"
+        dest: "<%= resource.path %>/"
+      ]
+      fontawesome: files:[
+        flatten: true
+        expand: true
+        src: ["font-awesome.min.css","font-awesome-ie7.min.css"]
+        cwd: "<%= components %>/font-awesome/build/assets/font-awesome/css/"
+        dest: "<%= resource.css %>/"
+      ,
+        flatten: true
+        expand: true
+        src: "*"
+        cwd: "<%= components %>/font-awesome/build/assets/font-awesome/font/"
+        dest: "<%= resource.font %>/"
+      ]
+      backboneunderscore:files:[
+        flattern: true
+        expand: true
+        src: "backbone.js"
+        cwd: "<%= components %>/backbone/"
+        dest: "<%= resource.js %>/lib/"
+      ,
+        flattern: true
+        expand: true
+        src: "underscore.js"
+        cwd: "<%= components %>/underscore"
+        dest: "<%= resource.js %>/lib/"
+      ]
 
     less:
       common:
@@ -105,6 +110,14 @@ module.exports = (grunt) ->
           dest + filename.replace /\.coffee$/g, ".js"
         options:
           bare: true
+
+    requirejs:
+      common:
+        options:
+          name: "main"
+          baseUrl: "<%= resource.js %>/"
+          mainConfigFile: "<%= resource.js %>/config.js"
+          out: "<%= resource.build %>/main.min.js"
 
     watch:
       html:

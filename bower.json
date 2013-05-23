@@ -8,6 +8,8 @@
   ],
   "dependencies":{
     "jquery":"*",
+    "backbone":"*",
+    "underscore":"*",
     "javascript-libs":"https://github.com/lexich/javascript-libs.git",
     "jquery.transit":"*",
     "requirejs":"*",

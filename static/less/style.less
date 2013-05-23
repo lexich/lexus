@@ -49,6 +49,12 @@
     }
   }
 }
+.ui_mainmenu__item{
+  cursor: default;
+}
+.ui_mainmenu__itemicon{
+  cursor: pointer;
+}
 //////////////
 // preloader
 //////////////
@@ -88,4 +94,32 @@
 .ui_page__content{
   height: 500px;
   border: 1px solid @black;
+}
+
+//////////////////
+// ui_car
+//////////////////
+.ui_car{
+  position: relative;
+  top: 150px;
+  left: 50px;
+  height: 100px;
+  width: 200px;
+  border: 1px solid @black;
+}
+.ui_car__wheel{
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border: 1px solid @black;
+  border-radius: 25px;
+background: #1e5799; /* Old browsers */
+background: -moz-linear-gradient(top, #1e5799 0%, #2989d8 0%, #e5e5e5 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1e5799), color-stop(0%,#2989d8), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #1e5799 0%,#2989d8 0%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #1e5799 0%,#2989d8 0%,#e5e5e5 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #1e5799 0%,#2989d8 0%,#e5e5e5 100%); /* IE10+ */
+background: linear-gradient(to bottom, #1e5799 0%,#2989d8 0%,#e5e5e5 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+
 }
