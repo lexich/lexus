@@ -89,6 +89,7 @@ require [
     el:"[data-js-scrollmenu]"
     events:
       "click a":"event_click"
+      "click a > *":"event_click_hack"
     delay:null
 
     initialize:->
@@ -130,15 +131,20 @@ require [
         @delay = null
       ), 1000
 
+    event_click_hack:(e)->
+      @click_link $(e.target).parent("a")
+
     event_click:(e)->
       e.preventDefault()
-      $link = $(e.target)
+      @click_link $(e.target)
+
+    click_link:($link)->
       href = $link.attr("href")
       if /^#.+/.test(href)
-        $section = $(href)
-        if $section.length == 1
+        $anchor = $(href)
+        if $anchor.length == 1
           from = $(window).scrollTop()
-          to = $section.position().top
+          to = $anchor.position().top
           @scroll(from, to)
 
   $(document).ready ->

@@ -19,7 +19,7 @@ body{
 @menu-active-color: @darkGrey;
 @menu-height: 60px;
 
-.ui_menu-fixed{
+.ui_menu-fixed.ui_menu-fixed{
     position: fixed;
     width: 100%;
 }
@@ -39,7 +39,7 @@ body{
     list-style: none;
     text-align: left;
     padding: 0;
-    & > li{
+    li{
       float: left;
       border-left: 1px solid #3c3d41;
       padding: 1px 0;
@@ -48,7 +48,7 @@ body{
         border-left: 0px;
         padding-left: 1px;
       }
-      :last-child{
+      &:last-child{
         padding-right:1px;
       }
       a{
@@ -62,21 +62,8 @@ body{
         line-height: 57px;
         text-align: center;
       }
-      &.ui_menu_disable{
-        a, a:hover{
-          line-height: 57px;
-          text-align: center;
-          display: block;
-          color: #EEE8DE;
-          background: transparent;
-          cursor: default;
-          float: left;
-        }
-      }
-      &.ui_menu__item-toolbar{
-        width: 270px;
-      }
-      a.ui_menu__item-logo{
+
+      .ui_menu__item-logo{
         &:hover{
           cursor: pointer;
         }
@@ -92,8 +79,23 @@ body{
       }
     }
   }
+}
+
+.ui_menu__item-toolbar{
+  width: 270px;
+}
 
 
+.ui_menu_disable.ui_menu_disable{
+  a, a:hover{
+    line-height: 57px;
+    text-align: center;
+    display: block;
+    color: #EEE8DE;
+    background: transparent;
+    cursor: default;
+    float: left;
+  }
 }
 
 .ui_menu__item-audio.ui_menu__item-audio{
@@ -105,9 +107,6 @@ body{
 }
 .ui_menu__item-loges{
   display: hidden;
-  a:hover{
-    cursor: pointer;
-  }
   h1{
     background: transparent url("../img/text_0.png") 18px 11px no-repeat;
     overflow: hidden;
@@ -117,13 +116,15 @@ body{
     margin: 0;
   }
 }
-
+.ui_menu__item-loges.ui_menu__item-loges a:hover{
+    cursor: pointer;
+}
 //////////////
 // preloader
 //////////////
 
 .ui_preloader {
-  display: none; //delete
+  //display: none; //debug
   width: 100%;
   height: 100%;
   top: 0;
