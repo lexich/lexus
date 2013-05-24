@@ -2,7 +2,6 @@ require [
   "jQuery"
   "Backbone"
   "underscore"
-  "lib/jquery.scrollpage"
 ],($, Backbone, _)->
 
   getRotationDegrees = (obj) ->

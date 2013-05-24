@@ -13,9 +13,5 @@ require.config
     "Backbone":
       deps:["underscore","jQuery"]
       exports:"Backbone"
-    "lib/foundation":
-      deps:["jQuery"]
-    "lib/jquery.scrollpage":
-      deps:["jQuery"]
     "lib/jquery.transit":
       deps:["jQuery"]

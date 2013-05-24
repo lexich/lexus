@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <link rel="stylesheet" href="css/foundation.css"/>
-    <link rel="stylesheet" href="css/font-awesome.min.css"/>
     <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-<div>
+<div style="margin: -6px">
     <div class="ui_layer">
         <div class="ui_layer__base ui_layer-1"></div>
         <div class="ui_layer__base ui_layer__base-group">
@@ -17,36 +15,35 @@
         </div>
     </div>
     <div class="ui_content">
-        <menu class="ui_fixedmenu" data-js-scrollmenu>
-        <nav class="top-bar ui_mainmenu">
-            <section class="top-bar-section ui_mainmenu__section">
-                <ul class="left">
-                    <li class="name">
-                        <a href="#one"><i class="icon-angle-right"></i> One</a>
-                    </li>
-                    <li class="name">
-                        <a href="#two"><i class="icon-angle-right"></i> Two</a>
-                    </li>
-                    <li class="name">
-                        <a href="#three"><i class="icon-angle-right"></i> Three</a>
-                    </li>
-                    <li class="name">
-                        <a href="#four"><i class="icon-angle-right"></i> Four</a>
-                    </li>
-                    <li class="name">
-                        <a href="javascript:void(0);" class="ui_mainmenu__item"  >
-                            <img  src="img/audio-on.gif" class="ui_mainmenu__itemicon" data-js-audio-change="img/audio-off.png"></i>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="right">
-                    <li class="name">
-                        <a href="#">Lexus</a>
-                    </li>
-                </ul>
-            </section>
-        </nav>
-    </menu>
+
+    <nav class="ui_menu ui_menu-fixed" data-js-scrollmenu>
+
+        <ul>
+            <li class="ui_menu_disable ui_menu__item-loges">
+                <a href="#one">
+                    <h1>Новый ES</h1>
+                </a>
+            </li>
+            <li>
+                <a href="#two"><i class="icon-angle-right"></i> Two</a>
+            </li>
+            <li>
+                <a href="#three"><i class="icon-angle-right"></i> Three</a>
+            </li>
+            <li>
+                <a href="#four"><i class="icon-angle-right"></i> Four</a>
+            </li>
+            <li class="ui_menu_disable ui_menu__item-toolbar">
+                <a href="javascript:void(0);" class="ui_menu__item-audio" >
+                    <img  src="img/audio-on.gif" data-js-audio-change="img/audio-off.png"></i>
+                </a>
+                <a href="#one" class="ui_menu__item-logo">
+                    <img src="img/logo_1.png" alt="Lexus Логотип"/>
+                </a>
+            </li>
+        </ul>
+
+    </nav>
     <section id="one" class="row ui_page">
         <header></header>
         <div class="ui_page__content">
@@ -77,7 +74,7 @@
 
 <div class="ui_preloader" data-js-preloader>
     <div class="ui_preloader__item" data-js-preloader-original>
-        <img src="img/logo_1.png" alt="Логотип"/>
+        <img src="img/logo_1.png" alt="Lexus Логотип"/>
     </div>
     <div class="ui_preloader__shadow" data-js-preloader-shadow></div>
 </div>
