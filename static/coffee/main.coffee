@@ -22,6 +22,11 @@ require [
     render:->
       $original = @$el.find "[data-js-preloader-original]"
       $shadow = @$el.find "[data-js-preloader-shadow]"
+      $shadow.css
+        position:"absolute"
+        top: $original.position().top
+        left:$original.position().left
+
 
       return if $shadow.length <= 0 or $original.length <= 0
       $shadow.animate {
@@ -30,7 +35,7 @@ require [
         duration: 2000
         complete: =>
           $shadow.parent("[data-js-preloader]").fadeOut(400)
-          @options?.next()
+          @options?.next?()
       }
       __super__::render.apply this, arguments
 
@@ -157,9 +162,7 @@ require [
       $item.attr("src", change)
       $item.data("js-audio-change", src)
 
-    preloader = (new Preloader
-      next:->
-    ).render()
+    preloader = (new Preloader).render()
 
     $car = $("[data-js-car]:first")
     data = $car.data("js-car") ? {}

@@ -131,16 +131,21 @@ body{
   left: 0;
   position: fixed;
   background-color: @black;
+  display: table;
   .mixin_itemsize() {
-    position: fixed;
-    bottom: 300px;
-    left: 45%;
   }
 }
 
 .ui_preloader__item {
   background-color: transparent;
+  vertical-align: middle;
+  text-align: center;
+  display: table-cell;
   .ui_preloader > .mixin_itemsize();
+}
+
+.ui_preloader__item-img{
+
 }
 
 .ui_preloader__shadow {
