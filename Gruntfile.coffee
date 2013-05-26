@@ -19,6 +19,12 @@ module.exports = (grunt) ->
         src: "*"
         cwd: "static/img"
         dest: "<%= resource.img %>/"
+      ,
+        flatten: true
+        expand: true
+        src: "*"
+        cwd: "maket/"
+        dest: "<%= resource.img %>/maket/"
       ]
       jquery: files: [
         flatten: true
