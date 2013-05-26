@@ -1,0 +1,38 @@
+//////////////
+// preloader
+//////////////
+
+.ui_preloader {
+  display: table;
+  display: none; //debug
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  background-color: @black;
+  
+  .mixin_itemsize() {
+  }
+}
+
+.ui_preloader__item {
+  background-color: transparent;
+  vertical-align: middle;
+  text-align: center;
+  display: table-cell;
+  .ui_preloader > .mixin_itemsize();
+}
+
+.ui_preloader__item-img{
+
+}
+
+.ui_preloader__shadow {
+  opacity: 0.5;
+  background-color: @black;
+  width: 100%;
+  height: 100%;
+  .ui_preloader > .mixin_itemsize();
+}
+

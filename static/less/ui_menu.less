@@ -1,0 +1,111 @@
+
+//////////////
+//
+//////////////
+@menu-passive-bgcolor: @darkGrey;
+@menu-passive-color: @white;
+
+@menu-active-bgcolor: @white;
+@menu-active-color: @darkGrey;
+@menu-height: 60px;
+
+.ui_menu-fixed.ui_menu-fixed{
+    position: fixed;
+    width: 100%;
+}
+
+.ui_menu{
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  ul{
+    max-width: 1040px;
+    position: relative;
+    background: #1d1f26;
+    display: block;
+    overflow: auto;
+    margin: 35px auto 0 auto;
+    list-style: none;
+    text-align: left;
+    padding: 0;
+    li{
+      float: left;
+      border-left: 1px solid #3c3d41;
+      padding: 1px 0;
+
+      &:first-child{
+        border-left: 0px;
+        padding-left: 1px;
+      }
+      &:last-child{
+        padding-right:1px;
+      }
+      a{
+        color: #EEE8DE;
+        background: transparent;
+        float: none;
+        text-decoration: none;
+        display: block;
+        height: 57px;
+        width: 185px;
+        line-height: 57px;
+        text-align: center;
+      }
+
+      .ui_menu__item-logo{
+        &:hover{
+          cursor: pointer;
+        }
+        &, &:hover{
+          float: right;
+          line-height: 72px;
+          margin-right: 22px;
+        }
+      }
+      a:hover{
+        background: #EEE8DE;
+        color: #1d1f26;
+      }
+    }
+  }
+}
+
+.ui_menu__item-toolbar{
+  width: 270px;
+}
+
+
+.ui_menu_disable.ui_menu_disable{
+  a, a:hover{
+    line-height: 57px;
+    text-align: center;
+    display: block;
+    color: #EEE8DE;
+    background: transparent;
+    cursor: default;
+    float: left;
+  }
+}
+
+.ui_menu__item-audio.ui_menu__item-audio{
+  margin-left: 5px;
+  width: auto;
+  img{
+    cursor: pointer;
+  }
+}
+.ui_menu__item-loges{
+  display: hidden;
+  h1{
+    background: transparent url("../img/text_0.png") 18px 11px no-repeat;
+    overflow: hidden;
+    text-indent: 1000px;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+  }
+}
+.ui_menu__item-loges.ui_menu__item-loges a:hover{
+    cursor: pointer;
+}

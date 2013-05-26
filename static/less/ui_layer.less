@@ -1,0 +1,39 @@
+/////////////////
+// layer
+/////////////////
+@layer-width:1920px;
+.ui_layer{
+  width: 100%;
+  display: block;
+  top: 0;
+  left: 0
+}
+.ui_layer__base{  
+  width: @layer-width;  
+  margin: auto;
+  display: block;  
+}
+
+@width-layer-1:1657px;
+.ui_layer-1{
+  width: @layer-width;  
+  height: @width-layer-1;
+  background: #FCF5ED url("../img/maket/layer-1.jpg") 0 0 no-repeat;
+}
+.ui_layer__base-group{
+  margin-top: -@width-layer-1;  
+}
+.ui_layer-2{
+  float: left;
+  width: @layer-width;
+  height: 1657px;  
+  background: transparent url("../img/maket/layer-2-1.png") 0 0 no-repeat;
+}
+.ui_layer-3{
+  float: left;
+  width: @layer-width;
+  height: 3140px;
+  background: transparent url("../img/maket/layer-2-2.jpg") 0 0 no-repeat;
+}
+
+
