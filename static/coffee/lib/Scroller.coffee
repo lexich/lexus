@@ -27,15 +27,14 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
 
     autoScroll:->
       from = from = $(window).scrollTop()
-      move = _.reduce @$el.find("a"), ((memo,a)->
+      move = _.reduce @$el.find("a"), ((memo,a)=>
         href = $(a).attr("href")
-        return memo unless /^#.+/.test(href)
-        $link = $(href)
-        return memo unless $link.length == 1
-        top = $link.position().top
+        top = @getAnchorPos href
+        return memo unless top?
         delta = top-from
         if Math.abs(delta) < Math.abs(memo) then delta else memo
       ), $(document).height()
+      return if move < 5
       @scroll from, from + move, 1000
 
     event_windowScroll:(e)->
@@ -48,6 +47,12 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
         @delay = null
       ), 1000
 
+    getAnchorPos:(href)->
+      return unless /^#.+/.test(href)
+      $anchor = $(href)
+      return unless $anchor.length == 1
+      $anchor.offset().top
+
     event_click_hack:(e)->
       @click_link $(e.target).parent("a")
 
@@ -57,11 +62,9 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
 
     click_link:($link)->
       href = $link.attr("href")
-      if /^#.+/.test(href)
-        $anchor = $(href)
-        if $anchor.length == 1
-          from = $(window).scrollTop()
-          to = $anchor.position().top
-          @scroll(from, to)
+      from = $(window).scrollTop()
+      to = @getAnchorPos href
+      return unless to?
+      @scroll(from, to)
 
   Scroller

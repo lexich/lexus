@@ -17,8 +17,8 @@ require [
       $item.attr("src", change)
       $item.data("js-audio-change", src)
 
-    #preloader = new Preloader    	
-    #preloader.render()
+    preloader = new Preloader    	
+    preloader.render()
 
     $car = $("[data-js-car]:first")
     data = $car.data("js-car") ? {}
@@ -26,7 +26,7 @@ require [
       el:$car
       movement:data.movement
       duration:data.duration
-    #car.render()
-    #new Scroller()
+    car.render()
+    new Scroller()
 
 

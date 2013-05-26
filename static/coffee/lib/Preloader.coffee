@@ -18,9 +18,7 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
           left = "+=#{$original.width()}"
           duration = @options.duration ? 2000          
           $shadow.animate { left }, {
-            duration
-            step:(now, tweek)->
-              console.log now
+            duration            
             complete: =>
               $shadow.parent("[data-js-preloader]").fadeOut(@options.fadeout ? 400)
               @options?.next?()

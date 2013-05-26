@@ -8,9 +8,23 @@ body{
   background-color: #090c13;
 }
 
-.ui_page__content{
-  height: 1200px;
-  border: 1px solid @white;
+@page__content-height:1200px;
+@page-width:1920px;
+.ui_page{
+	max-width: @page-width;
+	width: 100%;
+	margin: 0 auto;
+	border: 1px solid @white;
+	height: @page__content-height;  
+	display: block;
+}
+
+.ui_page__content{	
+  height: 640px;
+  width: 1200px;  
+  margin: 282px auto 0px auto;
+  display: block;
+  border: 1px solid #ffffff;
 }
 
 .ui_content{
@@ -18,7 +32,6 @@ body{
   top: 0;
   left: 0;
   width: 100%;
-
 }
 @import "ui_menu.less";
 @import "ui_preloader.less";
