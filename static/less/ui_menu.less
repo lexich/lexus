@@ -8,7 +8,8 @@
 @menu-active-bgcolor: @white;
 @menu-active-color: @darkGrey;
 @menu-height: 60px;
-
+@menu-width: 1160px;
+@menu-border-color: #3c3d41;
 .ui_menu-fixed.ui_menu-fixed{
     position: fixed;
     width: 100%;
@@ -19,19 +20,28 @@
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.ui_menu__panel{
+	width: @menu-width;
+	min-height: @menu-height;
+  max-height: @menu-height*2;
+	background-color: @menu-passive-bgcolor;
+	margin: 30px auto 0 auto;    
+
   ul{    
+    display: none;
+    //display: block;
     position: relative;
-    background: #1d1f26;
-    display: block;
-    overflow: auto;
-    margin: 35px auto 0 auto;
+    background: #1d1f26;    
+    overflow: auto;    
     list-style: none;
     text-align: left;
     padding: 0;
-    width: 1160px;
+    width: @menu-width;
     li{
       float: left;
-      border-left: 1px solid #3c3d41;
+      border-left: 1px solid @menu-border-color;
       padding: 1px 0;
 
       &:first-child{
@@ -52,23 +62,38 @@
         line-height: 57px;
         text-align: center;
       }
-
-      .ui_menu__item-logo{
-        &:hover{
-          cursor: pointer;
-        }
-        &, &:hover{
-          float: right;
-          line-height: 72px;
-          margin-right: 22px;
-        }
-      }
       a:hover{
         background: #EEE8DE;
         color: #1d1f26;
       }
     }
   }
+}
+
+.ui_menu__arrowdown{
+  width: 80px;
+  display: block;
+  height: @menu-height;
+  float: left;
+  img{
+      cursor: pointer;
+      padding: 26px 0px 0 26px;
+  }
+  &:hover ul{
+    display: block;
+  }  
+}
+
+.ui_menu__divider{
+  border-bottom: 1px solid @menu-border-color;
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  float: left;
+  line-height: 0;
 }
 
 .ui_menu__item-toolbar{
@@ -99,13 +124,27 @@
   display: hidden;
   h1{
     background: transparent url("../img/text_0.png") 18px 11px no-repeat;
+    min-width: 170px;
     overflow: hidden;
-    text-indent: 1000px;
-    height: 100%;
+    text-indent: -1000px;
+    height: @menu-height;
     padding: 0;
     margin: 0;
+    float: left;
   }
-}
-.ui_menu__item-loges.ui_menu__item-loges a:hover{
+  a:hover{
     cursor: pointer;
+	}
+}
+.ui_menu__item-logo{
+  height: @menu-height;
+  float: right;
+  &:hover{
+    cursor: pointer;
+  }
+  &, &:hover{
+    float: right;
+    line-height: 72px;
+    margin-right: 22px;
+  }
 }
