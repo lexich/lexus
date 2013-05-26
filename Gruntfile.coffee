@@ -130,7 +130,7 @@ module.exports = (grunt) ->
         files: "static/html/*.html"
         tasks: ["copy:html"]
       coffee:
-        files: "static/coffee/*.coffee"
+        files: ["static/coffee/*.coffee","static/coffee/**/*.coffee"]
         tasks: ["coffee"]
       less:
         files: "static/less/*.less"

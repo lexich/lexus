@@ -2,23 +2,27 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
 
   Preloader = do(
     __super__ = Backbone.View 
-  )-> __super__.extend
+  )-> __super__.extend        
         el:"[data-js-preloader]:first"
-        render:->
+        render:->              
           $original = @$el.find "[data-js-preloader-original]"
           $shadow = @$el.find "[data-js-preloader-shadow]"
           $shadow.css
             position:"absolute"
             top: $original.position().top
             left:$original.position().left
+            width: $original.width()
+            height: $original.height()            
 
-          return if $shadow.length <= 0 or $original.length <= 0
-          $shadow.animate {
-            left:"+=#{$original.width()}"
-          }, {
-            duration: 2000
+          return if $shadow.length <= 0 or $original.length <= 0          
+          left = "+=#{$original.width()}"
+          duration = @options.duration ? 2000          
+          $shadow.animate { left }, {
+            duration
+            step:(now, tweek)->
+              console.log now
             complete: =>
-              $shadow.parent("[data-js-preloader]").fadeOut(400)
+              $shadow.parent("[data-js-preloader]").fadeOut(@options.fadeout ? 400)
               @options?.next?()
           }
           __super__::render.apply this, arguments
