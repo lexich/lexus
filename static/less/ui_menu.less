@@ -23,22 +23,28 @@
 }
 
 .ui_menu__panel{
-	width: @menu-width;
-	min-height: @menu-height;
+  width: @menu-width;
+  min-height: @menu-height;
   max-height: @menu-height*2;
-	background-color: @menu-passive-bgcolor;
-	margin: 30px auto 0 auto;    
+  background-color: @menu-passive-bgcolor;
+  margin: 30px auto 0 auto;
 
   ul{    
     display: none;
-    //display: block;
     position: relative;
-    background: #1d1f26;    
-    overflow: auto;    
+    background: #1d1f26;
     list-style: none;
     text-align: left;
     padding: 0;
     width: @menu-width;
+    left: -170px;
+    margin: 22px 29px 10px -170px;
+    overflow: hidden;
+    border-top: 1px solid @menu-border-color;
+    border-bottom: 0px;
+    border-left: 0px;
+    border-right: 0px;
+
     li{
       float: left;
       border-left: 1px solid @menu-border-color;
@@ -71,7 +77,7 @@
 }
 
 .ui_menu__arrowdown{
-  width: 80px;
+  width: 60px;
   display: block;
   height: @menu-height;
   float: left;
@@ -79,21 +85,29 @@
       cursor: pointer;
       padding: 26px 0px 0 26px;
   }
-  &:hover ul{
-    display: block;
-  }  
+  &:hover{
+    cursor: pointer;
+    height: @menu-height * 2;
+    ul{
+      display: block;
+      position: relative;
+      left: 0;
+    }
+  }
 }
 
-.ui_menu__divider{
-  border-bottom: 1px solid @menu-border-color;
-  border-top: 0px;
-  border-left: 0px;
-  border-right: 0px;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  float: left;
-  line-height: 0;
+.ui_menu__item-arrowleft a{
+  &:before{
+    content: "";
+    width: 5px;
+    height: 9px;
+    display: inline-block;
+    background: transparent url("../img/marker.png") 0 0 no-repeat;
+    padding-left: 5px;
+  }
+  &:hover:before{
+    background: transparent url("../img/marker_on.png") 0 0 no-repeat;
+  }
 }
 
 .ui_menu__item-toolbar{
