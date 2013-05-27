@@ -27,6 +27,6 @@ require [
       movement:data.movement
       duration:data.duration
     car.render()
-    scroller = new Scroller()
+    #scroller = new Scroller()
 
 
