@@ -29,6 +29,19 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
     initialize:->
       @movement = @options.movement ? @movement
       @duration = @options.duration ? @duration
+      @initMenu()
+
+    initMenu:->
+      $("a[data-js-carmenu-color]").click (e)=>
+        e.preventDefault()
+        $("a[data-js-carmenu-color]").parent("li").removeClass("active")
+        $(e.target).parent("li").addClass("active")
+        path = $(e.target).data("js-carmenu-color")
+        return unless path?        
+        $car = @$el.find("[data-js-carcolor-change]")
+        $car.attr("class","")
+        $car.addClass(path)
+                 
 
     render:->
       if @isVisible()

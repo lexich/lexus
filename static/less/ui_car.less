@@ -4,17 +4,38 @@
 .ui_car{
   //display: none; //debug
   position: relative;
-  top: 150px;
+  top: 0px;
   left: 50px;
-  height: 300px;
+  height: 338px;
   width: 987px;
 }
-.ui_car-color4{
-  background: url("../img/car_color_4.png");
+[class*="ui_car-color"]{
+  width: 987px;
+  height: 262px;
+  position: relative;
+  top: 35px;
+  left: 37px;
 }
+.mixin_carcolor(@url){
+    background: transparent url(@url) 0 0 no-repeat;
+}
+.ui_car-color0{.mixin_carcolor("../img/car_color_0.png");}
+.ui_car-color1{.mixin_carcolor("../img/car_color_1.png");}
+.ui_car-color2{.mixin_carcolor("../img/car_color_2.png");}
+.ui_car-color3{.mixin_carcolor("../img/car_color_3.png");}
+.ui_car-color4{.mixin_carcolor("../img/car_color_4.png");}
+.ui_car-color5{.mixin_carcolor("../img/car_color_5.png");}
+.ui_car-color6{.mixin_carcolor("../img/car_color_6.png");}
+.ui_car-color7{.mixin_carcolor("../img/car_color_7.png");}
+.ui_car-color8{.mixin_carcolor("../img/car_color_8.png");}
+.ui_car-color9{.mixin_carcolor("../img/car_color_9.png");}
+
 .ui_car__wheel{
   position: absolute;
   width: 103px;
   height: 103px;
-  background: url("../img/wheel.png");
+  background: transparent url("../img/wheel.png");
+}
+.ui_car__shadow{
+  background: transparent url("../img/shadow.png") 0 0 no-repeat;
 }
