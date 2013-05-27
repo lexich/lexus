@@ -1,0 +1,112 @@
+
+.ui_page{
+	max-width: @page-width;
+	width: 100%;
+	margin: 0 auto;
+	border: 1px solid @white;
+	height: @page__content-height;
+	display: block;
+}
+
+.ui_page__content{
+  height: 640px;
+  width: 1200px;
+  margin: 282px auto 0px auto;
+  display: block;
+  border: 1px solid #ffffff;
+}
+
+.ui_content{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.ui_page__page1{
+  padding-top: 200px;
+  padding-left: 90px;
+  color: @ligthBrown;
+  width: @page1-content-width;
+  font-family: Tahoma, Arial, 'Sans Serif';
+  font-size: 11px;
+  font-style: normal;
+  h1{
+    background: transparent url("../img/text_1.png") 0 0 no-repeat;
+    width: @page1-content-width;
+    height: 196px;
+    text-indent: -1000px;
+    overflow: hidden;
+  }
+}
+
+
+.ui_page__page1Menu{
+  a{
+    padding-left: 10px;
+    text-decoration: none;
+    color: @ligthBrown;
+    font-weight: bold;
+  }
+  height: @page1-menu-height;
+  width: 100%;
+  text-decoration: none;
+  margin: 0px;
+  padding: 0px;
+  & > li{
+    border-bottom: 1px solid @ligthBrown;
+    border-left: 1px solid @ligthBrown;
+    border-top: 1px solid @ligthBrown;
+    border-right: 0px;
+    &:last-child{
+      border-right: 1px solid @ligthBrown;
+    }
+    height: @page1-menu-height;
+    width: @page1-content-width/3 - 3px;
+    float: left;
+    line-height: @page1-menu-height;
+    list-style: none;
+
+    background: transparent;
+    &, & >a{
+      color: @menu-passive-color;
+    }
+    &:hover{
+      background: @menu-active-bgcolor;
+      &, & > a{
+        color: @menu-active-color;
+      }
+      .ui_page__page1MenuItem{
+        display: block;
+      }
+    }
+  }
+}
+.ui_page__page1MenuItem{
+  position: relative;
+  top: 0;
+  display: none;
+  margin: 0px;
+  padding: 0px;
+  li{
+    border-bottom: 1px solid @ligthBrown;
+    border-left: 1px solid @ligthBrown;
+    border-right: 1px solid @ligthBrown;
+    border-top: 0px;
+    background: @menu-passive-bgcolor;
+    width: 100%;
+    margin-left: -1px;
+    &, & > a{
+      color: @menu-passive-color;
+    }
+
+    float: none;
+    list-style: none;
+    &:hover{
+      background: @menu-active-bgcolor;
+      &, & > a{
+        color: @menu-active-color;
+      }
+    }
+  }
+}

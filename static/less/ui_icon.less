@@ -1,0 +1,21 @@
+.ui_icon__arrowleft{
+  li:hover{
+    a:before{
+      background: transparent url(@icon-img-marker-on) 0 0 no-repeat;
+    }
+  }
+
+  a{
+    &:before{
+      content: "";
+      width: 5px;
+      height: 9px;
+      display: inline-block;
+      background: transparent url(@icon-img-marker) 0 0 no-repeat;
+      padding-left: 5px;
+    }
+    &:hover:before{
+      background: transparent url(@icon-img-marker-on) 0 0 no-repeat;
+    }
+  }
+}
