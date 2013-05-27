@@ -10,6 +10,10 @@
 @menu-height: 60px;
 @menu-width: 1160px;
 @menu-border-color: #3c3d41;
+
+
+@img-text-newes:"../img/text_0.png";
+
 .ui_menu-fixed.ui_menu-fixed{
     position: fixed;
     width: 100%;
@@ -96,19 +100,7 @@
   }
 }
 
-.ui_menu__item-arrowleft a{
-  &:before{
-    content: "";
-    width: 5px;
-    height: 9px;
-    display: inline-block;
-    background: transparent url("../img/marker.png") 0 0 no-repeat;
-    padding-left: 5px;
-  }
-  &:hover:before{
-    background: transparent url("../img/marker_on.png") 0 0 no-repeat;
-  }
-}
+
 
 .ui_menu__item-toolbar{
   width: 270px;
@@ -134,10 +126,11 @@
     cursor: pointer;
   }
 }
+
 .ui_menu__item-loges{
   display: hidden;
   h1{
-    background: transparent url("../img/text_0.png") 18px 11px no-repeat;
+    background: transparent url(@img-text-newes) 18px 11px no-repeat;
     min-width: 170px;
     overflow: hidden;
     text-indent: -1000px;
