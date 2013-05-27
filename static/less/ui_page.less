@@ -111,16 +111,28 @@
   }
 }
 
-.ui_page__page2Viewport{
-  height: 400px;
-  width: 100%;
-  background: #ffffff;
+.ui_page__page2{
+  height: 640px;
+  width: 1200px;
+  background: transparent url("../img/maket/page2.jpg") 0 0 no-repeat;
+  margin: -2px 0px 0px 0px;
+  padding: 430px 0 0 60px;
+  h2{
+    background: transparent url("../img/maket/tour.png") 0 0 no-repeat;    
+    overflow: hidden;
+    text-indent: -1000px;
+    width: 138px;
+    height: 76px;    
+  }
 }
 
 ul.ui_page_page2Pagination{
   text-decoration: none;
   display: block;
-  height: @menu-height;
+  height: @menu-height;    
+  padding: 0;
+  margin: 0;
+  
   li{
     line-height: 80px;
     width: 60px;
@@ -159,14 +171,33 @@ ul.ui_page_page2Pagination{
 }
 
 .ui_page_page2Circle.ui_page_page2Circle{
-  line-height: @menu-height;
-  width: @menu-height;
-  border-radius: @menu-height/2;
-  background: @white;
-  padding: 21px 25px;
-  color: @black;
-  &:after{
-    content: ">";
+  width: 60px;
+  height: 60px;
+  display: block;
+  padding: 0;
+  margin: 0;
+  a, a:hover, &:hover{
+    background: transparent;
   }
+  span{
+    width: 60px;
+    height: 60px;
+    display: block;
+    &.c1{
+      background: transparent url("../img/maket/pagination.png") 3px 2px no-repeat;
+    }
+    &.c2{
+      background: transparent url("../img/maket/pagination.png") -58px 2px no-repeat;      
+      margin-left: 12px;
+    }
+  }
+}
 
+.ui_page__page2Text{
+  width: 170px;  
+  color: @white;
+}
+
+.ui_page__page2Table{
+  width: 100%;
 }
