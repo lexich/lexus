@@ -561,6 +561,7 @@ ul.ui_page__page4Menu .c9 {
   left: 0;
   position: fixed;
   background-color: #000000;
+  z-index: 9999;
 }
 .ui_preloader__item {
   background-color: transparent;
