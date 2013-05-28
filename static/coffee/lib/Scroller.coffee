@@ -14,8 +14,9 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
       @autoScroll()
 
 
-    scroll:(from, to, duration = 2000)->
-      return if from == to
+    scroll:(from, to, duration = 2000)->      
+      return if from == to      
+      @$el.stop true, false
       @$el.prop "scroll", from
       @$el.animate {
         scroll:"+=#{to - from}"
@@ -25,7 +26,7 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
           window.scrollTo 0, now
       }
 
-    autoScroll:->
+    autoScroll:->      
       from = from = $(window).scrollTop()
       move = _.reduce @$el.find("a"), ((memo,a)=>
         href = $(a).attr("href")
@@ -33,11 +34,11 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
         return memo unless top?
         delta = top-from
         if Math.abs(delta) < Math.abs(memo) then delta else memo
-      ), $(document).height()
-      return if move < 5
+      ), $(document).height()      
+      return if Math.abs(move) < 5
       @scroll from, from + move, 1000
 
-    event_windowScroll:(e)->
+    event_windowScroll:(e)->      
       if @delay?
         clearTimeout(@delay)
         @delay = null
@@ -45,7 +46,7 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
       @delay = setTimeout (=>
         @autoScroll()
         @delay = null
-      ), 1000
+      ), 500
 
     getAnchorPos:(href)->
       return unless /^#.+/.test(href)
