@@ -125,6 +125,12 @@ module.exports = (grunt) ->
           mainConfigFile: "<%= resource.js %>/config.js"
           out: "<%= resource.build %>/main.min.js"
 
+    connect:
+      server:
+        options:
+          port: 9001,
+          base: 'www'
+
     watch:
       html:
         files: "static/html/*.html"
@@ -136,8 +142,8 @@ module.exports = (grunt) ->
         files: "static/less/*.less"
         tasks: ["less"]
 
-  grunt.registerTask "default", ["copy", "coffee", "less", "watch"]
-
+  grunt.registerTask "default", ["copy", "coffee", "less", "connect", "watch"]
+  grunt.loadNpmTasks 'grunt-contrib-connect'
   grunt.loadNpmTasks "grunt-contrib-clean"
   grunt.loadNpmTasks "grunt-contrib-coffee"
   grunt.loadNpmTasks "grunt-contrib-concat"

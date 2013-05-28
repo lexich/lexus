@@ -2,14 +2,13 @@
 .ui_page{
 	max-width: @page-width;
 	width: 100%;
-	margin: 0 auto;
-	border: 1px solid @white;
+	margin: 0 auto;	
 	height: @page__content-height;
 	display: block;
 }
 
 .ui_page__content{
-  height: 640px;
+  height: 634px;
   width: 1200px;
   margin: 282px auto 0px auto;
   display: block;
@@ -24,8 +23,8 @@
 }
 
 .ui_page__page1{
-  padding-top: 200px;
-  padding-left: 90px;
+  padding-top: 191px;
+  padding-left: 70px;
   color: @ligthBrown;
   width: @page1-content-width;
   font-family: Tahoma, Arial, 'Sans Serif';
@@ -40,6 +39,10 @@
   }
 }
 
+.ui_page__page1Text{
+  margin: 18px 0 0 0;
+  line-height: 18px;
+}
 
 .ui_page__page1Menu{
   a{
@@ -51,7 +54,7 @@
   height: @page1-menu-height;
   width: 100%;
   text-decoration: none;
-  margin: 0px;
+  margin: 22px 0 0 0;
   padding: 0px;
   & > li{
     border-bottom: 1px solid @ligthBrown;
@@ -64,7 +67,7 @@
     height: @page1-menu-height;
     width: @page1-content-width/3 - 3px;
     float: left;
-    line-height: @page1-menu-height;
+    line-height: 67px;
     list-style: none;
 
     background: transparent;
@@ -86,12 +89,12 @@
   position: relative;
   top: 0;
   display: none;
-  margin: 0px;
+  margin: -9px 0 0 0px;
   padding: 0px;
   li{
-    border-bottom: 1px solid @ligthBrown;
-    border-left: 1px solid @ligthBrown;
-    border-right: 1px solid @ligthBrown;
+    border-bottom: 1px solid @page1-menu-border-color;
+    border-left: 1px solid @page1-menu-border-color;
+    border-right: 1px solid @page1-menu-border-color;
     border-top: 0px;
     background: @menu-passive-bgcolor;
     width: 100%;
@@ -112,11 +115,11 @@
 }
 
 .ui_page__page2{
-  height: 640px;
+  height: 247px;
   width: 1200px;
   background: transparent url("../img/maket/page2.jpg") 0 0 no-repeat;
   margin: -2px 0px 0px 0px;
-  padding: 430px 0 0 60px;
+  padding: 389px 0 0 67px;
   h2{
     background: transparent url("../img/maket/tour.png") 0 0 no-repeat;    
     overflow: hidden;
@@ -134,14 +137,14 @@ ul.ui_page_page2Pagination{
   margin: 0;
   
   li{
-    line-height: 80px;
-    width: 60px;
+    line-height: 63px;    
+    width: 55px;
     list-style: none;
 
-    height: @menu-height;
-    border-bottom: 1px solid @ligthBrown;
-    border-left: 1px solid @ligthBrown;
-    border-top: 1px solid @ligthBrown;
+    height: 55px;
+    border-bottom: 1px solid @page2-menu-border-color;
+    border-left: 1px solid @page2-menu-border-color;
+    border-top: 1px solid @page2-menu-border-color;
     overflow: hidden;
     float: left;
 
@@ -151,10 +154,11 @@ ul.ui_page_page2Pagination{
         color: @menu-active-color;
       }
       font-weight: bold;
+      font-size: 12px;
       background: transparent;
       color: @menu-passive-color;
       text-decoration: none;
-      padding: 31px 30px 21px 12px;
+      padding: 22px 31px 15px 5px;
     }
     &:first-child{
       line-height: 60px;
@@ -165,7 +169,7 @@ ul.ui_page_page2Pagination{
       line-height: 60px;
       width: @menu-height + 10;
       border: 0px;
-      border-left: 1px solid @ligthBrown;
+      border-left: 1px solid @page2-menu-border-color;
     }
   }
 }
@@ -175,7 +179,7 @@ ul.ui_page_page2Pagination{
   height: 60px;
   display: block;
   padding: 0;
-  margin: 0;
+  margin: -3px 0 0 -1px;
   a, a:hover, &:hover{
     background: transparent;
   }
@@ -203,6 +207,8 @@ ul.ui_page_page2Pagination{
 }
 
 .ui_page__page3{
+  padding: 1px 0 0 10px;
+  height: 100%;
   h2{
     overflow: hidden;
     text-indent: -1000px;
@@ -210,7 +216,7 @@ ul.ui_page_page2Pagination{
     width: 713px;
     height: 100px;
     padding: 0;
-    margin: 200px auto -23px;
+    margin: 192px auto -23px;
   }
 }
 
@@ -280,7 +286,8 @@ ul.ui_page_page2Pagination{
 
 
 .ui_page__page4{
-  padding-top: 125px;
+  padding: 123px 0 1px 18px;
+  display: block;
   h2{
     overflow: hidden;
     text-indent: -1000px;
@@ -288,7 +295,7 @@ ul.ui_page_page2Pagination{
     height: 96px;
     width: 264px;
     padding: 0;
-    margin: 0;
+    margin: 20px 0 0 0;
   }
   
 }

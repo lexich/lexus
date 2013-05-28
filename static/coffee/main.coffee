@@ -26,7 +26,7 @@ require [
       el:$car
       movement:data.movement
       duration:data.duration
-    car.render()
-    scroller = new Scroller()
+    #car.render()
+    #scroller = new Scroller()
 
 
