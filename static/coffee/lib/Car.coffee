@@ -32,16 +32,26 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
       @initMenu()
 
     initMenu:->
-      $("a[data-js-carmenu-color]").click (e)=>
+      $links = $("a[data-js-carmenu-color]")
+      $links.click (e)=>
         e.preventDefault()
-        $("a[data-js-carmenu-color]").parent("li").removeClass("active")
+        $links.parent("li").removeClass("active")
         $(e.target).parent("li").addClass("active")
         path = $(e.target).data("js-carmenu-color")
         return unless path?        
         $car = @$el.find("[data-js-carcolor-change]")
         $car.attr("class","")
         $car.addClass(path)
-                 
+      setTimeout (->
+        content = _.map $links, (link)->          
+          "<div class='#{$(link).data("js-carmenu-color")}'></div>"
+        $("body").append $("<div>").css({
+          width: 0
+          height: 0
+          opacity: 0
+          overflow: "hidden"
+        }).html(content)
+      ), 2000
 
     render:->
       if @isVisible()
