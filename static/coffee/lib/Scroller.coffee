@@ -1,5 +1,5 @@
 define ["jQuery","underscore","Backbone"],($, _, Backbone)->
-
+  EPS = 10
   Scroller = do(
     __super__ = Backbone.View
   )-> __super__.extend
@@ -18,13 +18,16 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
       @autoScroll()
 
     scroll:(from, to, duration = 2000)->
+      from = parseInt from
+      to = parseInt to
       @scrollDirection = "" #clean scroll direction
-      return if from == to
+      move = to - from
+      return if Math.abs(move) < EPS
       @$el.stop true, false
       @$el.prop "scroll", from
       @animateScroll = true
       @$el.animate {
-        scroll:"+=#{to - from}"
+        scroll:"+=#{move}"
       },{
         duration
         step:(now)=>
@@ -42,7 +45,7 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
         delta = top-from
         if Math.abs(delta) < Math.abs(memo) then delta else memo
       ), $(document).height()
-      return if Math.abs(move) < 5
+      return if Math.abs(move) < EPS
       @scroll from, from + move, 1000
 
     event_windowScroll:(e)->
