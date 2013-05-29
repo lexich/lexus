@@ -8,22 +8,29 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
       "click a":"event_click"
       "click a > *":"event_click_hack"
     delay:null
+    animateScroll:false
+    lastScrollTop: 0
+    scrollDirection:""
 
     initialize:->
+      @lastScrollTop = $(window).scrollTop()
       $(window).scroll _.bind(@event_windowScroll,this)
       @autoScroll()
 
-
-    scroll:(from, to, duration = 2000)->      
-      return if from == to      
+    scroll:(from, to, duration = 2000)->
+      @scrollDirection = "" #clean scroll direction
+      return if from == to
       @$el.stop true, false
       @$el.prop "scroll", from
+      @animateScroll = true
       @$el.animate {
         scroll:"+=#{to - from}"
       },{
         duration
         step:(now)=>
           window.scrollTo 0, now
+        complete:->
+          @animateScroll = false
       }
 
     autoScroll:->      
@@ -34,15 +41,23 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
         return memo unless top?
         delta = top-from
         if Math.abs(delta) < Math.abs(memo) then delta else memo
-      ), $(document).height()      
+      ), $(document).height()
       return if Math.abs(move) < 5
       @scroll from, from + move, 1000
 
-    event_windowScroll:(e)->      
+    event_windowScroll:(e)->
+      curScrollTop = $(window).scrollTop()
+      sDirection = if curScrollTop > @lastScrollTop then "down" else "up"
+      @lastScrollTop = curScrollTop
+      console.log @scrollDirection
+      #if direction change and the last was defined stop previous animation
+      if @scrollDirection != "" and sDirection != @scrollDirection
+        @$el.stop true, false
+      @scrollDirection = sDirection
+
       if @delay?
         clearTimeout(@delay)
         @delay = null
-
       @delay = setTimeout (=>
         @autoScroll()
         @delay = null
