@@ -49,7 +49,6 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
       curScrollTop = $(window).scrollTop()
       sDirection = if curScrollTop > @lastScrollTop then "down" else "up"
       @lastScrollTop = curScrollTop
-      console.log @scrollDirection
       #if direction change and the last was defined stop previous animation
       if @scrollDirection != "" and sDirection != @scrollDirection
         @$el.stop true, false
