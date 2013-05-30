@@ -14,30 +14,31 @@ define(["jQuery", "underscore", "Backbone"], function($, _, Backbone) {
       parralax: {},
       parralaxItems: $(),
       initialize: function() {
-        var prev, result,
+        var $links, prev,
           _this = this;
 
         $(window).scroll(_.bind(this.event_windowScroll, this));
         this.autoScroll();
-        result = [];
-        _.each($("a[href^='#']", this.$el), function(item) {
+        $links = _.chain($("a[href^='#']", this.$el)).uniq(function(item) {
+          return $(item).attr("href");
+        }).sortBy(function(item) {
           var href;
 
           href = $(item).attr("href");
-          if ($(href).length === 1) {
-            return result.push($(href).position().top);
-          }
-        });
-        _.sortBy(result, function(x) {
-          return x;
-        });
+          return $(href).position().top;
+        }).value();
         prev = 0;
-        _.each(result, function(to) {
-          var from;
+        _.each($links, function(link) {
+          var from, to;
 
           from = prev;
-          _this.parralax[to] = function(p) {
-            return (from - p) * Math.PI / (from - to);
+          to = _this.getAnchorPos($(link).attr("href"));
+          _this.parralax[to] = {
+            from: from,
+            to: to,
+            call: function(p) {
+              return (this.from - p) * Math.PI / (this.from - this.to);
+            }
           };
           return prev = to;
         });
@@ -102,7 +103,7 @@ define(["jQuery", "underscore", "Backbone"], function($, _, Backbone) {
         return this.scroll(from, from + move, 1000);
       },
       event_windowScroll: function(e) {
-        var eff, i, mapKey, now, _i, _len, _ref,
+        var eff, i, mapKey, now, val, _i, _len, _ref,
           _this = this;
 
         if (this.stepAnimation === 0) {
@@ -113,21 +114,24 @@ define(["jQuery", "underscore", "Backbone"], function($, _, Backbone) {
         _ref = _.keys(this.parralax);
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           i = _ref[_i];
-          if (now < i) {
-            mapKey = i;
+          val = parseFloat(i);
+          if (now < val && ((typeof mapKey === "undefined" || mapKey === null) || mapKey > val)) {
+            mapKey = val;
           }
         }
         if (mapKey != null) {
-          eff = this.parralax[mapKey](now);
+          eff = this.parralax[mapKey].call(now);
+          console.log(eff);
           if (Math.abs(eff) < 0.000001) {
             eff = 0;
           }
           _.each(this.parralaxItems, function(item) {
-            var k, mTop;
+            var baseTop, k, marginTop;
 
             k = eff * parseFloat($(item).data("parralax"));
-            mTop = $(item).data("parralax-top");
-            return $(item).css("marginTop", "" + (k * eff + mTop) + "px");
+            baseTop = $(item).data("parralax-top");
+            marginTop = baseTop + k * eff;
+            return $(item).css("marginTop", "" + marginTop + "px");
           });
         }
         if (this.delay != null) {
@@ -140,7 +144,7 @@ define(["jQuery", "underscore", "Backbone"], function($, _, Backbone) {
         }), 500);
       },
       getAnchorPos: function(href) {
-        var $anchor, heigth, move, result, top, wHeigth;
+        var $anchor;
 
         if (!/^#.+/.test(href)) {
           return;
@@ -149,6 +153,11 @@ define(["jQuery", "underscore", "Backbone"], function($, _, Backbone) {
         if ($anchor.length !== 1) {
           return;
         }
+        return this.getAnchorPosItem($anchor);
+      },
+      getAnchorPosItem: function($anchor) {
+        var heigth, move, result, top, wHeigth;
+
         top = $anchor.offset().top;
         wHeigth = $(window).height();
         heigth = $anchor.height();
