@@ -1,12 +1,14 @@
 define ["jQuery","underscore","Backbone"],($, _, Backbone)->
   EPS = 10
+
+
   Scroller = do(
     __super__ = Backbone.View
   )-> __super__.extend
     el:"[data-js-scrollmenu]"
     events:
-      "click a":"event_click"
-      "click a > *":"event_click_hack"
+      "click a[href^='#']":"event_click"
+      "click a[href^='#'] > *":"event_click_hack"
     delay:null
     stepAnimation:0
 
@@ -14,7 +16,7 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
       $(window).scroll _.bind(@event_windowScroll,this)
       @autoScroll()
 
-    scroll:(from, to, duration = 2000)->
+    scroll:(from, to, duration = 10000)->
       from = parseInt from
       to = parseInt to
       _this = this
@@ -23,6 +25,12 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
       @$el.stop true, false
       @$el.prop "scroll", from
 
+      kEff = Math.PI / (move)
+      $items = $("[data-parralax]")
+      _.each $items,(item)->
+        mTop = parseInt $(item).css("marginTop").replace("px","")
+        $(item).data('parralax-top', mTop)
+
       @$el.animate {
         scroll:"+=#{move}"
       },{
@@ -30,13 +38,19 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
         step:(now)=>
           _this.stepAnimation += 1
           window.scrollTo 0, now
+          eff = Math.sin (from - now) * kEff
+          if Math.abs(eff) < 0.000001 then eff = 0
+          _.each $items, (item)->
+            k = eff * parseFloat $(item).data("parralax")
+            mTop = $(item).data("parralax-top")
+            $(item).css "marginTop", "#{k*eff + mTop}px"
         complete:->
 
       }
 
     autoScroll:->      
       from = from = $(window).scrollTop()
-      move = _.reduce @$el.find("a"), ((memo,a)=>
+      move = _.reduce @$el.find("a[href^='#']"), ((memo,a)=>
         href = $(a).attr("href")
         top = @getAnchorPos href
         return memo unless top?
@@ -47,7 +61,6 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
       @scroll from, from + move, 1000
 
     event_windowScroll:(e)->
-
       if @stepAnimation == 0
         @$el.stop true, false
       @stepAnimation = 0
