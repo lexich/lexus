@@ -18,16 +18,23 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
       $(window).scroll _.bind(@event_windowScroll,this)
       @autoScroll()
 
-      result = []
-      _.each $("a[href^='#']", @$el), (item)->
-        href = $(item).attr("href")
-        if $(href).length == 1
-          result.push $(href).position().top
-      _.sortBy result, (x)-> x
+      $links = _.chain(
+        $("a[href^='#']", @$el)
+      ).uniq(
+        (item)-> $(item).attr("href")
+      ).sortBy(
+        (item)->
+          href = $(item).attr("href")
+          $(href).position().top
+      ).value()
       prev = 0
-      _.each result, (to)=>
+      _.each $links, (link)=>
         from = prev
-        @parralax[to] = (p)-> (from-p)*Math.PI / (from-to)
+        to = @getAnchorPos $(link).attr("href")
+        @parralax[to] = {
+          from, to
+          call: (p)-> (@from-p)*Math.PI / (@from-@to)
+        }
         prev = to
       @parralaxItems = $("[data-parralax]")
       _.each @parralaxItems,(item)->
@@ -75,16 +82,20 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
       now = $(window).scrollTop()
 
       for i in _.keys(@parralax)
-        if now < i
-          mapKey = i
+        val = parseFloat i
+        if now < val and ((not mapKey?) or mapKey > val )
+          mapKey = val
 
       if mapKey?
-        eff = @parralax[mapKey](now)
+        eff = @parralax[mapKey].call(now)
+        console.log eff
         if Math.abs(eff) < 0.000001 then eff = 0
         _.each @parralaxItems, (item)->
           k = eff * parseFloat $(item).data("parralax")
-          mTop = $(item).data("parralax-top")
-          $(item).css "marginTop", "#{k*eff + mTop}px"
+          baseTop = $(item).data("parralax-top")
+
+          marginTop = baseTop + k * eff
+          $(item).css "marginTop", "#{marginTop}px"
 
 
       if @delay?
@@ -99,6 +110,9 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
       return unless /^#.+/.test(href)
       $anchor = $(href)
       return unless $anchor.length == 1
+      @getAnchorPosItem $anchor
+
+    getAnchorPosItem:($anchor)->
       top = $anchor.offset().top
       wHeigth = $(window).height()
       heigth = $anchor.height()
@@ -110,6 +124,7 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
         result
       else
         top
+
 
     event_click_hack:(e)->
       @click_link $(e.target).parent("a")
