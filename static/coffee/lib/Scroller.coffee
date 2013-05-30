@@ -15,8 +15,13 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
 
     initialize:->
       $(window).scroll _.bind(@event_windowScroll,this)
+      $(window).resize _.bind(@event_windowResize, this)
+      @event_windowResize()
       @autoScroll()
 
+    event_windowResize:->
+      console.log "event_windowResize"
+      @updateMenu()
       $links = _.chain(
         $("a[href^='#']", @$el)
       ).uniq(
@@ -43,7 +48,6 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
         mTop = parseInt $(item).css("marginTop").replace("px","")
         $(item).data('parralax-top', mTop)
 
-
     scroll:(from, to, duration = 2000)->
       from = parseInt from
       to = parseInt to
@@ -60,9 +64,27 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
         step:(now)=>
           _this.stepAnimation += 1
           window.scrollTo 0, now
-        complete:->
-
+        complete:=>
+          @updateMenu()
       }
+
+    updateMenu:->
+      orig = $(window).scrollTop()
+      offset = $(document).height()
+      top = _.reduce $("section > header"), ((memo,item)->
+        pos = $(item).offset().top
+        if offset > pos - orig
+          offset = Math.abs(pos - orig)
+          pos
+        else
+          memo
+      ), null
+      if top > orig
+        offset = top - orig + 15
+      else
+        offset = 15
+      $panel = @$el.find(".ui_menu__panel")
+      $panel.css "marginTop", "#{offset}px"
 
     autoScroll:->      
       from = from = $(window).scrollTop()
