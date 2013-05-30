@@ -54,7 +54,7 @@ define(["jQuery", "underscore", "Backbone"], function($, _, Backbone) {
           _this = this;
 
         if (duration == null) {
-          duration = 10000;
+          duration = 2000;
         }
         from = parseInt(from);
         to = parseInt(to);
