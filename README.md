@@ -19,4 +19,4 @@
 
 > grunt
 
-> открыть браузер http://localhost:9001/
+> открыть браузер http://localhost:9002/

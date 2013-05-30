@@ -64,7 +64,17 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
       return unless /^#.+/.test(href)
       $anchor = $(href)
       return unless $anchor.length == 1
-      $anchor.offset().top
+      top = $anchor.offset().top
+      wHeigth = $(window).height()
+      heigth = $anchor.height()
+      move = (wHeigth-heigth)/2
+
+      if move > 0
+        result = top - move
+        result = 0 if result < 0
+        result
+      else
+        top
 
     event_click_hack:(e)->
       @click_link $(e.target).parent("a")
