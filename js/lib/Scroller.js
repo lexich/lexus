@@ -1,36 +1,79 @@
 define(["jQuery", "underscore", "Backbone"], function($, _, Backbone) {
-  var Scroller;
+  var EPS, Scroller;
 
+  EPS = 10;
   Scroller = (function(__super__) {
     return __super__.extend({
       el: "[data-js-scrollmenu]",
       events: {
-        "click a": "event_click",
-        "click a > *": "event_click_hack"
+        "click a[href^='#']": "event_click",
+        "click a[href^='#'] > *": "event_click_hack"
       },
       delay: null,
+      stepAnimation: 0,
+      parralax: {},
+      parralaxItems: $(),
       initialize: function() {
+        var prev, result,
+          _this = this;
+
         $(window).scroll(_.bind(this.event_windowScroll, this));
-        return this.autoScroll();
+        this.autoScroll();
+        result = [];
+        _.each($("a[href^='#']", this.$el), function(item) {
+          var href;
+
+          href = $(item).attr("href");
+          if ($(href).length === 1) {
+            return result.push($(href).position().top);
+          }
+        });
+        _.sortBy(result, function(x) {
+          return x;
+        });
+        prev = 0;
+        _.each(result, function(to) {
+          var from;
+
+          from = prev;
+          _this.parralax[to] = function(p) {
+            return (from - p) * Math.PI / (from - to);
+          };
+          return prev = to;
+        });
+        this.parralaxItems = $("[data-parralax]");
+        return _.each(this.parralaxItems, function(item) {
+          var mTop;
+
+          mTop = parseInt($(item).css("marginTop").replace("px", ""));
+          return $(item).data('parralax-top', mTop);
+        });
       },
       scroll: function(from, to, duration) {
-        var _this = this;
+        var move,
+          _this = this;
 
         if (duration == null) {
-          duration = 2000;
+          duration = 10000;
         }
-        if (from === to) {
+        from = parseInt(from);
+        to = parseInt(to);
+        _this = this;
+        move = to - from;
+        if (Math.abs(move) < EPS) {
           return;
         }
         this.$el.stop(true, false);
         this.$el.prop("scroll", from);
         return this.$el.animate({
-          scroll: "+=" + (to - from)
+          scroll: "+=" + move
         }, {
           duration: duration,
           step: function(now) {
+            _this.stepAnimation += 1;
             return window.scrollTo(0, now);
-          }
+          },
+          complete: function() {}
         });
       },
       autoScroll: function() {
@@ -38,7 +81,7 @@ define(["jQuery", "underscore", "Backbone"], function($, _, Backbone) {
           _this = this;
 
         from = from = $(window).scrollTop();
-        move = _.reduce(this.$el.find("a"), (function(memo, a) {
+        move = _.reduce(this.$el.find("a[href^='#']"), (function(memo, a) {
           var delta, href, top;
 
           href = $(a).attr("href");
@@ -53,14 +96,40 @@ define(["jQuery", "underscore", "Backbone"], function($, _, Backbone) {
             return memo;
           }
         }), $(document).height());
-        if (Math.abs(move) < 5) {
+        if (Math.abs(move) < EPS) {
           return;
         }
         return this.scroll(from, from + move, 1000);
       },
       event_windowScroll: function(e) {
-        var _this = this;
+        var eff, i, mapKey, now, _i, _len, _ref,
+          _this = this;
 
+        if (this.stepAnimation === 0) {
+          this.$el.stop(true, false);
+        }
+        this.stepAnimation = 0;
+        now = $(window).scrollTop();
+        _ref = _.keys(this.parralax);
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          i = _ref[_i];
+          if (now < i) {
+            mapKey = i;
+          }
+        }
+        if (mapKey != null) {
+          eff = this.parralax[mapKey](now);
+          if (Math.abs(eff) < 0.000001) {
+            eff = 0;
+          }
+          _.each(this.parralaxItems, function(item) {
+            var k, mTop;
+
+            k = eff * parseFloat($(item).data("parralax"));
+            mTop = $(item).data("parralax-top");
+            return $(item).css("marginTop", "" + (k * eff + mTop) + "px");
+          });
+        }
         if (this.delay != null) {
           clearTimeout(this.delay);
           this.delay = null;
@@ -71,7 +140,7 @@ define(["jQuery", "underscore", "Backbone"], function($, _, Backbone) {
         }), 500);
       },
       getAnchorPos: function(href) {
-        var $anchor;
+        var $anchor, heigth, move, result, top, wHeigth;
 
         if (!/^#.+/.test(href)) {
           return;
@@ -80,7 +149,19 @@ define(["jQuery", "underscore", "Backbone"], function($, _, Backbone) {
         if ($anchor.length !== 1) {
           return;
         }
-        return $anchor.offset().top;
+        top = $anchor.offset().top;
+        wHeigth = $(window).height();
+        heigth = $anchor.height();
+        move = (wHeigth - heigth) / 2;
+        if (move > 0) {
+          result = top - move;
+          if (result < 0) {
+            result = 0;
+          }
+          return result;
+        } else {
+          return top;
+        }
       },
       event_click_hack: function(e) {
         return this.click_link($(e.target).parent("a"));

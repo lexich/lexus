@@ -24,11 +24,12 @@ img {
   margin: 0 auto;
   height: 915px;
   display: block;
+  padding-top: 282px;
 }
 .ui_page__content {
   height: 634px;
   width: 1200px;
-  margin: 282px auto 0px auto;
+  margin: 0px auto 0px auto;
   display: block;
 }
 .ui_content {
@@ -555,6 +556,7 @@ ul.ui_page__page4Menu .c9 {
 }
 .ui_preloader {
   display: table;
+  display: none;
   width: 100%;
   height: 100%;
   top: 0;
