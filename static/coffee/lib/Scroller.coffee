@@ -28,11 +28,14 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
       ).value()
       prev = 0
       _.each $links, (link)=>
-        from = prev
         to = @getAnchorPos $(link).attr("href")
+        from = parseInt prev
+        to = parseInt to
         @parralax[to] = {
           from, to
-          call: (p)-> (@from-p)*Math.PI / (@from-@to)
+          call: (p)->
+            x = Math.PI * (p - @from) / (@to-@from)
+            Math.sin x
         }
         prev = to
       @parralaxItems = $("[data-parralax]")
@@ -79,23 +82,23 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
       @stepAnimation = 0
 
       now = $(window).scrollTop()
-
+      mapKey = null
       for i in _.keys(@parralax)
         val = parseFloat i
-        if now < val and ((not mapKey?) or mapKey > val )
+        if now > val then continue
+        if mapKey is null
+          mapKey = val
+        else if mapKey > now and mapKey > val
           mapKey = val
 
       if mapKey?
         eff = @parralax[mapKey].call(now)
-        console.log eff
-        if Math.abs(eff) < 0.000001 then eff = 0
+        if Math.abs(eff) < 0.01 then eff = 0
         _.each @parralaxItems, (item)->
           k = eff * parseFloat $(item).data("parralax")
           baseTop = $(item).data("parralax-top")
-
-          marginTop = baseTop + k * eff
+          marginTop = baseTop + k
           $(item).css "marginTop", "#{marginTop}px"
-
 
       if @delay?
         clearTimeout(@delay)
