@@ -11,10 +11,29 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
       "click a[href^='#'] > *":"event_click_hack"
     delay:null
     stepAnimation:0
+    parralax:{}
+    parralaxItems:$()
 
     initialize:->
       $(window).scroll _.bind(@event_windowScroll,this)
       @autoScroll()
+
+      result = []
+      _.each $("a[href^='#']", @$el), (item)->
+        href = $(item).attr("href")
+        if $(href).length == 1
+          result.push $(href).position().top
+      _.sortBy result, (x)-> x
+      prev = 0
+      _.each result, (to)=>
+        from = prev
+        @parralax[to] = (p)-> (from-p)*Math.PI / (from-to)
+        prev = to
+      @parralaxItems = $("[data-parralax]")
+      _.each @parralaxItems,(item)->
+        mTop = parseInt $(item).css("marginTop").replace("px","")
+        $(item).data('parralax-top', mTop)
+
 
     scroll:(from, to, duration = 10000)->
       from = parseInt from
@@ -25,12 +44,6 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
       @$el.stop true, false
       @$el.prop "scroll", from
 
-      kEff = Math.PI / (move)
-      $items = $("[data-parralax]")
-      _.each $items,(item)->
-        mTop = parseInt $(item).css("marginTop").replace("px","")
-        $(item).data('parralax-top', mTop)
-
       @$el.animate {
         scroll:"+=#{move}"
       },{
@@ -38,12 +51,6 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
         step:(now)=>
           _this.stepAnimation += 1
           window.scrollTo 0, now
-          eff = Math.sin (from - now) * kEff
-          if Math.abs(eff) < 0.000001 then eff = 0
-          _.each $items, (item)->
-            k = eff * parseFloat $(item).data("parralax")
-            mTop = $(item).data("parralax-top")
-            $(item).css "marginTop", "#{k*eff + mTop}px"
         complete:->
 
       }
@@ -64,6 +71,21 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
       if @stepAnimation == 0
         @$el.stop true, false
       @stepAnimation = 0
+
+      now = $(window).scrollTop()
+
+      for i in _.keys(@parralax)
+        if now < i
+          mapKey = i
+
+      if mapKey?
+        eff = @parralax[mapKey](now)
+        if Math.abs(eff) < 0.000001 then eff = 0
+        _.each @parralaxItems, (item)->
+          k = eff * parseFloat $(item).data("parralax")
+          mTop = $(item).data("parralax-top")
+          $(item).css "marginTop", "#{k*eff + mTop}px"
+
 
       if @delay?
         clearTimeout(@delay)
