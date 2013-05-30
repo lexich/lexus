@@ -35,7 +35,7 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
         $(item).data('parralax-top', mTop)
 
 
-    scroll:(from, to, duration = 10000)->
+    scroll:(from, to, duration = 2000)->
       from = parseInt from
       to = parseInt to
       _this = this
