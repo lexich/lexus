@@ -18,9 +18,9 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
       @autoScroll()
 
     scroll:(from, to, duration = 2000)->
+      console.log "scroll #{from} #{to}"
       @scrollDirection = "" #clean scroll direction
-      return if from == to
-      @$el.stop true, false
+      return if from == to      
       @$el.prop "scroll", from
       @animateScroll = true
       @$el.animate {
@@ -28,6 +28,7 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
       },{
         duration
         step:(now)=>
+          console.log "step #{now}"
           window.scrollTo 0, now
         complete:->
           @animateScroll = false
@@ -50,9 +51,11 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
       sDirection = if curScrollTop > @lastScrollTop then "down" else "up"
       @lastScrollTop = curScrollTop
       #if direction change and the last was defined stop previous animation
-      if @scrollDirection != "" and sDirection != @scrollDirection
+      if @scrollDirection == "" 
+        @scrollDirection = sDirection
+      else if sDirection != @scrollDirection
         @$el.stop true, false
-      @scrollDirection = sDirection
+        @scrollDirection = ""      
 
       if @delay?
         clearTimeout(@delay)
@@ -66,7 +69,8 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
       return unless /^#.+/.test(href)
       $anchor = $(href)
       return unless $anchor.length == 1
-      $anchor.offset().top
+      top = $anchor.position().top
+      parseInt top
 
     event_click_hack:(e)->
       @click_link $(e.target).parent("a")
