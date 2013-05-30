@@ -1,12 +1,12 @@
 <!doctype html>
 <html lang="ru-RU">
 <head>
-    <meta charset="UTF-8">    
+    <meta charset="UTF-8">
     <meta name="title" content="Lexus ES" />
     <meta name="description" content="Lexus ES" />
     <title>Lexus ES</title>
 
-    <link rel="stylesheet" href="css/style.css"/>    
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 <div class="ui_preloader" data-js-preloader>
@@ -15,11 +15,13 @@
     </div>
     <div class="ui_preloader__shadow" data-js-preloader-shadow></div>
 </div>
-<div style="margin: -6px">
+<div style="margin-top: -6px">
     <div class="ui_layer">
-      <div class="ui_layer__base ui_layer-1"></div>      
-      <div class="ui_layer__base ui_layer-2 ui_layer__base-group"></div>
-      <div class="ui_layer__base ui_layer-3"></div>        
+        <div class="ui_layer__base ui_layer-1" data-parralax="50"></div>
+        <div class="ui_layer__base ui_layer__base-group" data-parralax="100">
+            <div class="ui_layer__base ui_layer-2"></div>
+            <div class="ui_layer__base ui_layer-3"></div>
+        </div>
     </div>
     <div class="ui_content">
 
@@ -27,7 +29,7 @@
     	<div class="ui_menu__panel">
     		<a href="#one" class="ui_menu__item-loges">
     			<h1>Новый ES</h1>
-  			</a>        
+  			</a>
     		<a href="#one" class="ui_menu__item-logo">
       		<img src="img/maket/logo-lexus.png" alt="Lexus Логотип"/>
       	</a>
@@ -49,12 +51,12 @@
               </a>
             </li>
           </ul>
-        </div>              
+        </div>
     	</div>
     </nav>
     <section class="row ui_page">
         <header></header>
-        <div id="one" class="ui_page__content">
+        <div id="one" data-js-scrollpos class="ui_page__content">
             <div class="ui_page__page1">
                 <h1>Встречайте LEXUS ES</h1>
                 <p class="ui_page__page1Text">Новый элегантный Lexus ES подарит Вам комфорт, превосходящий ваши ожидания. Мы увеличили
@@ -85,7 +87,7 @@
     </section>
     <section class="row ui_page">
         <header></header>
-        <div id="two" class="ui_page__content">
+        <div  id="two" data-js-scrollpos class="ui_page__content">
             <div class="ui_page__page2">
               <table class="ui_page__page2Table">
                 <tbody>
@@ -95,8 +97,8 @@
 <span style="font-style:italic;">Смотреть</span></p></td>
                   </tr>
                 </tbody>
-              </table>              
-              
+              </table>
+
               <ul class="ui_page_page2Pagination">
                 <li><a href="javascript:void(0);" class="ui_page_page2Circle"><span class="c1"></span></a></li>
                 <li class="ui_icon__arrowleft"><a href="javascript:void(0);">1</a></li>
@@ -113,7 +115,7 @@
     </section>
     <section  class="row ui_page">
         <header></header>
-        <div id="three" class="ui_page__content">
+        <div id="three" data-js-scrollpos class="ui_page__content">
           <div class="ui_page__page3">
             <h2>Особенности</h2>
             <ul class="ui_page__page3Menu">
@@ -137,7 +139,7 @@
               </li>
               <li><div class="ui_page__page3Item-7"></div><span></span>
                 <p>Гибридный<br>привод<br>Lexus</p>
-              </li>              
+              </li>
               <li><div class="ui_page__page3Item-9"></div><span></span>
                 <p>Комфорт<br>пассажира на<br>заднем сидении</p>
               </li>
@@ -146,15 +148,15 @@
               </li>
               <li><div class="ui_page__page3Item-11"></div><span></span>
                 <p>Приветственный<br>свет</p>
-              </li>              
+              </li>
             </ul>
           </div>
         </div>
         <footer></footer>
     </section>
     <section class="row ui_page">
-        <header></header>     
-        <div id="four" class="ui_page__content">
+        <header></header>
+        <div id="four" data-js-scrollpos class="ui_page__content">
           <div class="ui_page__page4">
           <table>
             <tbody>
@@ -187,7 +189,7 @@
           </div>
           </div>
         </div>
-        <footer>          
+        <footer>
         </footer>
     </section>
     </div>
@@ -198,3 +200,4 @@
 <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
+

@@ -41,13 +41,15 @@ define(["jQuery", "underscore", "Backbone"], function($, _, Backbone) {
         return this.initMenu();
       },
       initMenu: function() {
-        var _this = this;
+        var $links,
+          _this = this;
 
-        return $("a[data-js-carmenu-color]").click(function(e) {
+        $links = $("a[data-js-carmenu-color]");
+        $links.click(function(e) {
           var $car, path;
 
           e.preventDefault();
-          $("a[data-js-carmenu-color]").parent("li").removeClass("active");
+          $links.parent("li").removeClass("active");
           $(e.target).parent("li").addClass("active");
           path = $(e.target).data("js-carmenu-color");
           if (path == null) {
@@ -57,6 +59,19 @@ define(["jQuery", "underscore", "Backbone"], function($, _, Backbone) {
           $car.attr("class", "");
           return $car.addClass(path);
         });
+        return setTimeout((function() {
+          var content;
+
+          content = _.map($links, function(link) {
+            return "<div class='" + ($(link).data("js-carmenu-color")) + "'></div>";
+          });
+          return $("body").append($("<div>").css({
+            width: 0,
+            height: 0,
+            opacity: 0,
+            overflow: "hidden"
+          }).html(content));
+        }), 2000);
       },
       render: function() {
         var $wheels, prevMove,
