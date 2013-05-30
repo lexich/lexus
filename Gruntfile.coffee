@@ -128,7 +128,7 @@ module.exports = (grunt) ->
     connect:
       server:
         options:
-          port: 9001,
+          port: 9002,
           base: 'www'
 
     watch:

@@ -1,61 +1,101 @@
 define ["jQuery","underscore","Backbone"],($, _, Backbone)->
+  EPS = 10
 
   Scroller = do(
     __super__ = Backbone.View
   )-> __super__.extend
     el:"[data-js-scrollmenu]"
     events:
-      "click a":"event_click"
-      "click a > *":"event_click_hack"
+      "click a[href^='#']":"event_click"
+      "click a[href^='#'] > *":"event_click_hack"
     delay:null
-    animateScroll:false
-    lastScrollTop: 0
-    scrollDirection:""
+    stepAnimation:0
+    parralax:{}
+    parralaxItems:$()
 
     initialize:->
-      @lastScrollTop = $(window).scrollTop()
       $(window).scroll _.bind(@event_windowScroll,this)
       @autoScroll()
 
+      $links = _.chain(
+        $("a[href^='#']", @$el)
+      ).uniq(
+        (item)-> $(item).attr("href")
+      ).sortBy(
+        (item)->
+          href = $(item).attr("href")
+          $(href).position().top
+      ).value()
+      prev = 0
+      _.each $links, (link)=>
+        from = prev
+        to = @getAnchorPos $(link).attr("href")
+        @parralax[to] = {
+          from, to
+          call: (p)-> (@from-p)*Math.PI / (@from-@to)
+        }
+        prev = to
+      @parralaxItems = $("[data-parralax]")
+      _.each @parralaxItems,(item)->
+        mTop = parseInt $(item).css("marginTop").replace("px","")
+        $(item).data('parralax-top', mTop)
+
+
     scroll:(from, to, duration = 2000)->
-      console.log "scroll #{from} #{to}"
-      @scrollDirection = "" #clean scroll direction
-      return if from == to      
+      from = parseInt from
+      to = parseInt to
+      _this = this
+      move = to - from
+      return if Math.abs(move) < EPS
+      @$el.stop true, false
       @$el.prop "scroll", from
-      @animateScroll = true
+
       @$el.animate {
-        scroll:"+=#{to - from}"
+        scroll:"+=#{move}"
       },{
         duration
         step:(now)=>
-          console.log "step #{now}"
+          _this.stepAnimation += 1
           window.scrollTo 0, now
         complete:->
-          @animateScroll = false
+
       }
 
     autoScroll:->      
       from = from = $(window).scrollTop()
-      move = _.reduce @$el.find("a"), ((memo,a)=>
+      move = _.reduce @$el.find("a[href^='#']"), ((memo,a)=>
         href = $(a).attr("href")
         top = @getAnchorPos href
         return memo unless top?
         delta = top-from
         if Math.abs(delta) < Math.abs(memo) then delta else memo
       ), $(document).height()
-      return if Math.abs(move) < 5
+      return if Math.abs(move) < EPS
       @scroll from, from + move, 1000
 
     event_windowScroll:(e)->
-      curScrollTop = $(window).scrollTop()
-      sDirection = if curScrollTop > @lastScrollTop then "down" else "up"
-      @lastScrollTop = curScrollTop
-      #if direction change and the last was defined stop previous animation
-      if @scrollDirection == "" 
-        @scrollDirection = sDirection
-      else if sDirection != @scrollDirection
+      if @stepAnimation == 0
         @$el.stop true, false
-        @scrollDirection = ""      
+      @stepAnimation = 0
+
+      now = $(window).scrollTop()
+
+      for i in _.keys(@parralax)
+        val = parseFloat i
+        if now < val and ((not mapKey?) or mapKey > val )
+          mapKey = val
+
+      if mapKey?
+        eff = @parralax[mapKey].call(now)
+        console.log eff
+        if Math.abs(eff) < 0.000001 then eff = 0
+        _.each @parralaxItems, (item)->
+          k = eff * parseFloat $(item).data("parralax")
+          baseTop = $(item).data("parralax-top")
+
+          marginTop = baseTop + k * eff
+          $(item).css "marginTop", "#{marginTop}px"
+
 
       if @delay?
         clearTimeout(@delay)
@@ -69,8 +109,21 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
       return unless /^#.+/.test(href)
       $anchor = $(href)
       return unless $anchor.length == 1
-      top = $anchor.position().top
-      parseInt top
+      @getAnchorPosItem $anchor
+
+    getAnchorPosItem:($anchor)->
+      top = $anchor.offset().top
+      wHeigth = $(window).height()
+      heigth = $anchor.height()
+      move = (wHeigth-heigth)/2
+
+      if move > 0
+        result = top - move
+        result = 0 if result < 0
+        result
+      else
+        top
+
 
     event_click_hack:(e)->
       @click_link $(e.target).parent("a")
