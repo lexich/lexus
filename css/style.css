@@ -1,5 +1,7 @@
 body {
   background-color: #090c13;
+  font-family: Tahoma, Arial, Sans Serif;
+  font-size: 11px;
 }
 img {
   border: 0px;
@@ -647,7 +649,7 @@ ul.ui_page__page4Menu .c9 {
   width: 100%;
   max-width: 1920px;
   height: 1657px;
-  background: #fcf5ed url("../img/maket/layer-1.jpg") 0 0 no-repeat;
+  background: transparent url("../img/maket/layer-1.jpg") 0 0 no-repeat;
 }
 .ui_layer__base-group {
   margin-top: -1657px;
@@ -655,7 +657,7 @@ ul.ui_page__page4Menu .c9 {
 .ui_layer-2 {
   width: 100%;
   max-width: 1920px;
-  height: 1657px;
+  height: 1656px;
   background: transparent url("../img/maket/layer-2-1.png") 0 0 no-repeat;
 }
 .ui_layer-3 {
