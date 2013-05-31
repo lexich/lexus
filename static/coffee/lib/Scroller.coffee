@@ -5,6 +5,7 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
     __super__ = Backbone.View
   )-> __super__.extend
     el:"[data-js-scrollmenu]"
+    $panel:$()
     events:
       "click a[href^='#']":"event_click"
       "click a[href^='#'] > *":"event_click_hack"
@@ -16,12 +17,13 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
     initialize:->
       $(window).scroll _.bind(@event_windowScroll,this)
       $(window).resize _.bind(@event_windowResize, this)
+      @$panel = $("[data-js-scrollmenu-panel]", @$el)
       @event_windowResize()
       @autoScroll()
 
     event_windowResize:->
-      console.log "event_windowResize"
-      @updateMenu()
+      @parralax = {}
+
       $links = _.chain(
         $("a[href^='#']", @$el)
       ).uniq(
@@ -32,71 +34,81 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
           $(href).position().top
       ).value()
       prev = 0
+      normHeigth = $(document).height() / (1.0+$links.length)
       _.each $links, (link)=>
-        to = @getAnchorPos $(link).attr("href")
+
+        [to, $anchor] = @getAnchorPos $(link).attr("href")
         from = parseInt prev
         to = parseInt to
         @parralax[to] = {
-          from, to
+          from, to,
+          move: to - from
           call: (p)->
-            x = Math.PI * (p - @from) / (@to-@from)
-            Math.sin x
+            x = Math.PI * (p - @from) / @move
+            (@move/normHeigth)* Math.sin x
         }
         prev = to
       @parralaxItems = $("[data-parralax]")
       _.each @parralaxItems,(item)->
         mTop = parseInt $(item).css("marginTop").replace("px","")
         $(item).data('parralax-top', mTop)
+      @autoScroll()
 
-    scroll:(from, to, duration = 2000)->
-      from = parseInt from
-      to = parseInt to
+    scroll:(options)->
+      from = parseInt options.from
+      to = parseInt options.to
+      duration = options.duration ? 2000
+      $anchor = options.$anchor
+
       _this = this
       move = to - from
       return if Math.abs(move) < EPS
       @$el.stop true, false
       @$el.prop "scroll", from
 
+      menuFrom = @getMenuCurPos()
+      menuTo = @getMenuPosItem(to, $anchor)
+      menuMove = menuTo - menuFrom
+      @$el.prop "menuMargin", menuFrom
+
+
       @$el.animate {
         scroll:"+=#{move}"
+        menuMargin: "+=#{menuMove}"
       },{
         duration
-        step:(now)=>
-          _this.stepAnimation += 1
-          window.scrollTo 0, now
+        step:(now, tween)=>
+          if tween.prop is "scroll"
+            _this.stepAnimation += 1
+            window.scrollTo 0, now
+          else if tween.prop is "menuMargin"
+            @$panel.css "marginTop", "#{now}px"
         complete:=>
-          @updateMenu()
-      }
 
-    updateMenu:->
-      orig = $(window).scrollTop()
-      offset = $(document).height()
-      top = _.reduce $("section > header"), ((memo,item)->
-        pos = $(item).offset().top
-        if offset > pos - orig
-          offset = Math.abs(pos - orig)
-          pos
-        else
-          memo
-      ), null
-      if top > orig
-        offset = top - orig + 15
-      else
-        offset = 15
-      $panel = @$el.find(".ui_menu__panel")
-      $panel.css "marginTop", "#{offset}px"
+      }
 
     autoScroll:->      
       from = from = $(window).scrollTop()
+      $anchor = $()
       move = _.reduce @$el.find("a[href^='#']"), ((memo,a)=>
         href = $(a).attr("href")
-        top = @getAnchorPos href
+        [top, $_anchor] = @getAnchorPos href
         return memo unless top?
         delta = top-from
-        if Math.abs(delta) < Math.abs(memo) then delta else memo
+        if Math.abs(delta) < Math.abs(memo)
+          $anchor = $_anchor
+          delta
+        else
+          memo
       ), $(document).height()
-      return if Math.abs(move) < EPS
-      @scroll from, from + move, 1000
+      unless Math.abs(move) < EPS
+        to = from + move
+        duration = 1000
+        @scroll {from, to, duration, $anchor}
+      else
+        to = @getAnchorPosItem $anchor
+        marginTop = @getMenuPosItem to, $anchor
+        @$panel.css "marginTop", "#{marginTop}px"
 
     event_windowScroll:(e)->
       if @stepAnimation == 0
@@ -128,13 +140,22 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
       @delay = setTimeout (=>
         @autoScroll()
         @delay = null
-      ), 500
+      ), 1000
+
+    getMenuCurPos:->
+      marginTop = parseFloat @$panel.css("marginTop").replace("px","")
+      marginTop
+
+    getMenuPosItem:(pos, $anchor )->
+      top = $anchor.offset().top
+      if top < pos then 15 else (top - pos) + 15
 
     getAnchorPos:(href)->
-      return unless /^#.+/.test(href)
+      return [null, $anchor] unless /^#.+/.test(href)
       $anchor = $(href)
-      return unless $anchor.length == 1
-      @getAnchorPosItem $anchor
+      return [null, $anchor] unless $anchor.length == 1
+      pos = @getAnchorPosItem $anchor
+      return [pos, $anchor]
 
     getAnchorPosItem:($anchor)->
       top = $anchor.offset().top
@@ -160,8 +181,8 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
     click_link:($link)->
       href = $link.attr("href")
       from = $(window).scrollTop()
-      to = @getAnchorPos href
+      [to, $anchor] = @getAnchorPos href
       return unless to?
-      @scroll(from, to)
+      @scroll {from, to, $anchor}
 
   Scroller
