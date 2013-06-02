@@ -6,11 +6,11 @@
     <meta name="description" content="Lexus ES" />
     <title>Lexus ES</title>
 
-    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/style.css?p=$hash$"/>
 
     <script type="text/javascript" src="js/lib/require.js"></script>
-    <script type="text/javascript" src="js/config.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/config.js?p=$hash$"></script>
+    <script type="text/javascript" src="js/main.js?p=$hash$"></script>
 </head>
 <body>
 <div class="ui_preloader" data-js-preloader>
@@ -19,7 +19,7 @@
     </div>
     <div class="ui_preloader__shadow" data-js-preloader-shadow></div>
 </div>
-<div style="margin: -7px">
+<div class="ui_main">
     <div class="ui_layer">
         <div class="ui_layer__base ui_layer-1" data-parralax="20"></div>
         <div class="ui_layer__base ui_layer__base-group" data-parralax="30">
@@ -92,28 +92,41 @@
     <section class="row ui_page">
         <header></header>
         <div  id="two" class="ui_page__content">
-            <div class="ui_page__page2">
-              <table class="ui_page__page2Table">
-                <tbody>
-                  <tr>
-                    <td><h2>ТУР</h2></td>
-                    <td style="width:380px"><p class="ui_page__page2Text">Представляем Вашему вниманию видео-тур по новому Lexus ES
-<span style="font-style:italic;">Смотреть</span></p></td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <ul class="ui_page_page2Pagination">
-                <li><a href="javascript:void(0);" class="ui_page_page2Circle"><span class="c1"></span></a></li>
-                <li class="ui_icon__arrowleft"><a href="javascript:void(0);">1</a></li>
-                <li class="ui_icon__arrowleft"><a href="javascript:void(0);">2</a></li>
-                <li class="ui_icon__arrowleft"><a href="javascript:void(0);">3</a></li>
-                <li class="ui_icon__arrowleft"><a href="javascript:void(0);">4</a></li>
-                <li class="ui_icon__arrowleft"><a href="javascript:void(0);">5</a></li>
-                <li class="ui_icon__arrowleft"><a href="javascript:void(0);">6</a></li>
-                <li><a href="javascript:void(0);" class="ui_page_page2Circle" ><span class="c2"></span></a></li>
+          <div class="ui_page__page2">                        
+            <h2>ТУР</h2>
+            <div class="ui_page_page2Pagination">
+              <a href="javascript:void(0);" class="ui_page_page2Circle">
+                <span class="c1"></span>
+              </a>
+              <ul>
+                <li class="ui_icon__arrowleft">
+                  <a href="javascript:void(0);">1</a>
+                </li>
+                <li class="ui_icon__arrowleft">
+                  <a href="javascript:void(0);">2</a>
+                </li>
+                <li class="ui_icon__arrowleft">
+                  <a href="javascript:void(0);">3</a>
+                </li>
+                <li class="ui_icon__arrowleft">
+                  <a href="javascript:void(0);">4</a>
+                </li>
+                <li class="ui_icon__arrowleft">
+                  <a href="javascript:void(0);">5</a>
+                </li>
+                <li class="ui_icon__arrowleft">
+                  <a href="javascript:void(0);">6</a>
+                </li>                  
               </ul>
+              <a href="javascript:void(0);" class="ui_page_page2Circle" >
+                <span class="c2"></span>
+              </a>
             </div>
+            <div class="ui_page__page2Annotate">
+              Представляем Вашему вниманию видео-тур по новому Lexus ES
+            <a class="ui_page__page2Annotate-link" href="javascript:void(0);">Смотреть</a>              
+            </div>
+          </div>
         </div>
         <footer></footer>
     </section>
@@ -122,7 +135,8 @@
         <div id="three" class="ui_page__content">
           <div class="ui_page__page3">
             <h2>Особенности</h2>
-            <ul class="ui_page__page3Menu">
+            <div class="ui_page__page3Menu">
+            <ul>
               <li><div class="ui_page__page3Item-1"></div><span></span>
                 <p>Система оповещения<br>о смене полосы<br>движения</p>
               </li>
@@ -154,6 +168,10 @@
                 <p>Приветственный<br>свет</p>
               </li>
             </ul>
+            <p class="ui_page__page3Menu-annotate">Познакомьтесь поближе с уникальными особенностями Lexus ES
+            <span class="ui_page__page3Menu-hook"></span>
+            </p>            
+            </div>
           </div>
         </div>
         <footer></footer>

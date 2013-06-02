@@ -3,6 +3,7 @@ module.exports = (grunt) ->
     components: "components"
 
     resource:
+      hash: (new Date).getTime().toString()
       path:"www"
       js: "<%= resource.path %>/js"
       css: "<%= resource.path %>/css"
@@ -91,18 +92,27 @@ module.exports = (grunt) ->
           port: 9002,
           base: 'www'
 
+    replace:
+      hash:
+        src: ["<%= resource.path %>/index.html"],
+        overwrite: true,
+        replacements: [{
+          from: "$hash$",
+          to: "<%= resource.hash %>"
+        }]
+
     watch:
       html:
         files: "static/html/*.html"
-        tasks: ["copy:html"]
+        tasks: ["copy:html","replace:hash"]
       coffee:
         files: ["static/coffee/*.coffee","static/coffee/**/*.coffee"]
-        tasks: ["coffee"]
+        tasks: ["coffee", "replace:hash"]
       less:
         files: "static/less/*.less"
-        tasks: ["less"]
+        tasks: ["less", "replace:hash"]
 
-  grunt.registerTask "default", ["copy", "coffee", "less", "connect", "watch"]
+  grunt.registerTask "default", ["copy", "coffee", "less", "replace:hash", "connect", "watch"]
   grunt.loadNpmTasks 'grunt-contrib-connect'
   grunt.loadNpmTasks "grunt-contrib-clean"
   grunt.loadNpmTasks "grunt-contrib-coffee"

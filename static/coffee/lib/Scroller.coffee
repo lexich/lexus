@@ -148,7 +148,8 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
 
     getMenuPosItem:(pos, $anchor )->
       top = $anchor.offset().top
-      if top < pos then 15 else (top - pos) + 15
+      offset = 18
+      if top < pos then offset else (top - pos) + offset
 
     getAnchorPos:(href)->
       return [null, $anchor] unless /^#.+/.test(href)
