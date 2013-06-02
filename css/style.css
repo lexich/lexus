@@ -1,10 +1,22 @@
 body {
   background-color: #090c13;
+  font-family: Tahoma, Arial, Sans Serif;
+  font-size: 11px;
+}
+.ui_main {
+  margin: 0px -7px 0 -7px;
+}
+.ui_content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-top: 0px;
 }
 img {
   border: 0px;
 }
-.ui_icon__arrowleft li:hover a:before {
+.ui_icon__arrowleft:hover a:before {
   background: transparent url("../img/marker_on.png") 0 0 no-repeat;
 }
 .ui_icon__arrowleft a:before {
@@ -24,7 +36,7 @@ img {
   margin: 0 auto;
   height: 915px;
   display: block;
-  padding-top: 282px;
+  padding-top: 280px;
 }
 .ui_page__content {
   height: 634px;
@@ -32,31 +44,27 @@ img {
   margin: 0px auto 0px auto;
   display: block;
 }
-.ui_content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-}
 .ui_page__page1 {
   padding-top: 191px;
   padding-left: 70px;
   color: #888785;
-  width: 547px;
+  width: 553px;
   font-family: Tahoma, Arial, 'Sans Serif';
   font-size: 11px;
   font-style: normal;
 }
 .ui_page__page1 h1 {
-  background: transparent url("../img/text_1.png") 0 0 no-repeat;
-  width: 547px;
+  background: transparent url("../img/maket/text-0.png") 0 0 no-repeat;
+  width: 553px;
   height: 196px;
   text-indent: -1000px;
   overflow: hidden;
 }
 .ui_page__page1Text {
-  margin: 18px 0 0 0;
+  margin: 15px 0 0 0;
   line-height: 18px;
+  font-family: Arial;
+  font-size: 11px;
 }
 .ui_page__page1Menu {
   height: 55px;
@@ -77,7 +85,7 @@ img {
   border-top: 1px solid #888785;
   border-right: 0px;
   height: 55px;
-  width: 179.33333333333334px;
+  width: 181.33333333333334px;
   float: left;
   line-height: 67px;
   list-style: none;
@@ -134,7 +142,7 @@ img {
   width: 1200px;
   background: transparent url("../img/maket/page2.jpg") 0 0 no-repeat;
   margin: 0px 0px 0px 0px;
-  padding: 389px 0 0 67px;
+  padding: 405px 0 0 70px;
 }
 .ui_page__page2 h2 {
   background: transparent url("../img/maket/tour.png") 0 0 no-repeat;
@@ -143,15 +151,39 @@ img {
   width: 138px;
   height: 76px;
 }
-ul.ui_page_page2Pagination {
+.ui_page__page2Annotate {
+  width: 191px;
+  margin: -399px 0px 0px 791px;
+  font-size: 11px;
+  font-family: Arial;
+  line-height: 23px;
+  color: #afafaf;
+}
+a.ui_page__page2Annotate-link {
+  font-weight: bold;
+  font-style: italic;
+  color: #171717;
+  text-decoration: none;
+}
+a.ui_page__page2Annotate-link:hover {
+  text-decoration: underline;
+}
+.ui_page_page2Pagination {
+  display: block;
+  height: 60px;
+  padding: 5px 0px 0px 0px;
+}
+.ui_page_page2Pagination ul {
   text-decoration: none;
   display: block;
   height: 60px;
-  padding: 0;
   margin: 0;
+  padding: 0px 0px 0px 9px;
+  float: left;
 }
-ul.ui_page_page2Pagination li {
-  line-height: 63px;
+.ui_page_page2Pagination ul li {
+  line-height: 72px;
+  text-indent: 14px;
   width: 56px;
   list-style: none;
   height: 56px;
@@ -161,62 +193,50 @@ ul.ui_page_page2Pagination li {
   overflow: hidden;
   float: left;
 }
-ul.ui_page_page2Pagination li a {
+.ui_page_page2Pagination ul li a {
   font-weight: bold;
-  font-size: 12px;
-  background: transparent;
-  color: #ffffff;
+  font-size: 10px;
   text-decoration: none;
-  padding: 25px 35px 16px 5px;
+  background: transparent;
+  color: #f2e4cf;
 }
-ul.ui_page_page2Pagination li a:hover {
-  background: #ffffff;
-  color: #1d1f26;
+.ui_page_page2Pagination ul li:hover {
+  background: #f2e4cf;
 }
-ul.ui_page_page2Pagination li:first-child {
-  line-height: 60px;
-  border: 0px;
-  width: 70px;
+.ui_page_page2Pagination ul li:hover a {
+  color: #9b9b9b;
 }
-ul.ui_page_page2Pagination li:last-child {
-  line-height: 60px;
-  width: 70px;
-  border: 0px;
-  border-left: 1px solid #4c4c4d;
-}
-.ui_page_page2Circle.ui_page_page2Circle {
+.ui_page_page2Circle {
+  float: left;
   width: 60px;
   height: 60px;
   display: block;
   padding: 0;
-  margin: -3px 0 0 -1px;
+  margin: 0px;
 }
-.ui_page_page2Circle.ui_page_page2Circle a,
-.ui_page_page2Circle.ui_page_page2Circle a:hover,
-.ui_page_page2Circle.ui_page_page2Circle:hover {
+.ui_page_page2Circle a,
+.ui_page_page2Circle a:hover,
+.ui_page_page2Circle:hover {
   background: transparent;
 }
-.ui_page_page2Circle.ui_page_page2Circle span {
+.ui_page_page2Circle span {
   width: 60px;
   height: 60px;
   display: block;
 }
-.ui_page_page2Circle.ui_page_page2Circle span.c1 {
+.ui_page_page2Circle span.c1 {
   background: transparent url("../img/maket/pagination.png") 3px 2px no-repeat;
 }
-.ui_page_page2Circle.ui_page_page2Circle span.c2 {
+.ui_page_page2Circle span.c2 {
   background: transparent url("../img/maket/pagination.png") -58px 2px no-repeat;
-  margin-left: 12px;
+  margin-left: 9px;
 }
 .ui_page__page2Text {
   width: 170px;
   color: #ffffff;
 }
-.ui_page__page2Table {
-  width: 100%;
-}
 .ui_page__page3 {
-  padding: 10px 0 0 14px;
+  padding: 18px 0 0 18px;
   display: block;
 }
 .ui_page__page3 h2 {
@@ -228,15 +248,17 @@ ul.ui_page_page2Pagination li:last-child {
   padding: 0;
   margin: 192px auto -23px;
 }
-.ui_page__page3Menu {
+.ui_page__page3Menu ul {
   text-decoration: none;
+  height: 112px;
+  padding: 4px 0px 0px 41px;
 }
 .ui_page__page3Menu li {
   cursor: pointer;
   list-style: none;
   float: left;
   height: 112px;
-  width: 112px;
+  width: 108px;
   background: transparent;
 }
 .ui_page__page3Menu li:hover {
@@ -245,6 +267,9 @@ ul.ui_page_page2Pagination li:last-child {
 .ui_page__page3Menu li:hover > span,
 .ui_page__page3Menu li:hover > p {
   display: block;
+  font-size: 11px;
+  font-family: Arial;
+  color: #696969;
 }
 .ui_page__page3Menu li > [class*='ui_page__page3Item-'] {
   margin: 17px 0px 0px 6px;
@@ -271,6 +296,25 @@ ul.ui_page_page2Pagination li:last-child {
   height: 30px;
   margin: -52px 0px 0px 50px;
   padding: 0px 0px 0px 0px;
+}
+.ui_page__page3Menu:hover .ui_page__page3Menu-annotate {
+  display: none;
+}
+.ui_page__page3Menu-annotate {
+  font-size: 11px;
+  font-family: Arial;
+  text-align: center;
+  color: #696969;
+  line-height: 6px;
+  text-indent: 8px;
+}
+.ui_page__page3Menu-hook {
+  width: 20px;
+  height: 21px;
+  display: block;
+  background: transparent url("../img/maket/hook2.png") 0 0 no-repeat;
+  margin: 30px auto;
+  padding-right: 12px;
 }
 .ui_page__page3Item-1 {
   background: transparent url("../img/icons_1.png") 11px 0 no-repeat;
@@ -328,7 +372,8 @@ ul.ui_page_page2Pagination li:last-child {
   height: 78px;
 }
 .ui_page__page4 {
-  padding: 123px 0 1px 18px;
+  padding: 118px 0 0px 20px;
+  margin-top: 15px;
   display: block;
 }
 .ui_page__page4 h2 {
@@ -342,13 +387,14 @@ ul.ui_page_page2Pagination li:last-child {
 }
 ul.ui_page__page4Menu {
   text-decoration: none;
+  height: 39px;
 }
 ul.ui_page__page4Menu li {
   cursor: pointer;
   list-style: none;
   float: left;
   height: 39px;
-  width: 39px;
+  width: 40px;
   display: block;
 }
 ul.ui_page__page4Menu li:hover,
@@ -556,6 +602,7 @@ ul.ui_page__page4Menu .c9 {
 }
 .ui_preloader {
   display: table;
+  display: none;
   width: 100%;
   height: 100%;
   top: 0;
@@ -638,6 +685,7 @@ ul.ui_page__page4Menu .c9 {
   display: block;
   top: 0;
   left: 0;
+  margin-top: -15px;
 }
 .ui_layer__base {
   margin: 0 auto;

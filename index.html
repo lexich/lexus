@@ -6,11 +6,11 @@
     <meta name="description" content="Lexus ES" />
     <title>Lexus ES</title>
 
-    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/style.css?p=1370207138395"/>
 
     <script type="text/javascript" src="js/lib/require.js"></script>
-    <script type="text/javascript" src="js/config.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/config.js?p=1370207138395"></script>
+    <script type="text/javascript" src="js/main.js?p=1370207138395"></script>
 </head>
 <body>
 <div class="ui_preloader" data-js-preloader>
@@ -19,10 +19,10 @@
     </div>
     <div class="ui_preloader__shadow" data-js-preloader-shadow></div>
 </div>
-<div style="margin-top: -6px">
+<div class="ui_main">
     <div class="ui_layer">
-        <div class="ui_layer__base ui_layer-1" data-parralax="50"></div>
-        <div class="ui_layer__base ui_layer__base-group" data-parralax="100">
+        <div class="ui_layer__base ui_layer-1" data-parralax="20"></div>
+        <div class="ui_layer__base ui_layer__base-group" data-parralax="30">
             <div class="ui_layer__base ui_layer-2"></div>
             <div class="ui_layer__base ui_layer-3"></div>
         </div>
@@ -30,7 +30,7 @@
     <div class="ui_content">
 
     <nav class="ui_menu ui_menu-fixed" data-js-scrollmenu>
-    	<div class="ui_menu__panel">
+    	<div class="ui_menu__panel" data-js-scrollmenu-panel>
     		<a href="#one" class="ui_menu__item-loges">
     			<h1>Новый ES</h1>
   			</a>
@@ -60,7 +60,7 @@
     </nav>
     <section class="row ui_page">
         <header></header>
-        <div id="one" data-js-scrollpos class="ui_page__content">
+        <div id="one" class="ui_page__content">
             <div class="ui_page__page1">
                 <h1>Встречайте LEXUS ES</h1>
                 <p class="ui_page__page1Text">Новый элегантный Lexus ES подарит Вам комфорт, превосходящий ваши ожидания. Мы увеличили
@@ -91,38 +91,52 @@
     </section>
     <section class="row ui_page">
         <header></header>
-        <div  id="two" data-js-scrollpos class="ui_page__content">
-            <div class="ui_page__page2">
-              <table class="ui_page__page2Table">
-                <tbody>
-                  <tr>
-                    <td><h2>ТУР</h2></td>
-                    <td style="width:380px"><p class="ui_page__page2Text">Представляем Вашему вниманию видео-тур по новому Lexus ES
-<span style="font-style:italic;">Смотреть</span></p></td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <ul class="ui_page_page2Pagination">
-                <li><a href="javascript:void(0);" class="ui_page_page2Circle"><span class="c1"></span></a></li>
-                <li class="ui_icon__arrowleft"><a href="javascript:void(0);">1</a></li>
-                <li class="ui_icon__arrowleft"><a href="javascript:void(0);">2</a></li>
-                <li class="ui_icon__arrowleft"><a href="javascript:void(0);">3</a></li>
-                <li class="ui_icon__arrowleft"><a href="javascript:void(0);">4</a></li>
-                <li class="ui_icon__arrowleft"><a href="javascript:void(0);">5</a></li>
-                <li class="ui_icon__arrowleft"><a href="javascript:void(0);">6</a></li>
-                <li><a href="javascript:void(0);" class="ui_page_page2Circle" ><span class="c2"></span></a></li>
+        <div  id="two" class="ui_page__content">
+          <div class="ui_page__page2">                        
+            <h2>ТУР</h2>
+            <div class="ui_page_page2Pagination">
+              <a href="javascript:void(0);" class="ui_page_page2Circle">
+                <span class="c1"></span>
+              </a>
+              <ul>
+                <li class="ui_icon__arrowleft">
+                  <a href="javascript:void(0);">1</a>
+                </li>
+                <li class="ui_icon__arrowleft">
+                  <a href="javascript:void(0);">2</a>
+                </li>
+                <li class="ui_icon__arrowleft">
+                  <a href="javascript:void(0);">3</a>
+                </li>
+                <li class="ui_icon__arrowleft">
+                  <a href="javascript:void(0);">4</a>
+                </li>
+                <li class="ui_icon__arrowleft">
+                  <a href="javascript:void(0);">5</a>
+                </li>
+                <li class="ui_icon__arrowleft">
+                  <a href="javascript:void(0);">6</a>
+                </li>                  
               </ul>
+              <a href="javascript:void(0);" class="ui_page_page2Circle" >
+                <span class="c2"></span>
+              </a>
             </div>
+            <div class="ui_page__page2Annotate">
+              Представляем Вашему вниманию видео-тур по новому Lexus ES
+            <a class="ui_page__page2Annotate-link" href="javascript:void(0);">Смотреть</a>              
+            </div>
+          </div>
         </div>
         <footer></footer>
     </section>
     <section  class="row ui_page">
         <header></header>
-        <div id="three" data-js-scrollpos class="ui_page__content">
+        <div id="three" class="ui_page__content">
           <div class="ui_page__page3">
             <h2>Особенности</h2>
-            <ul class="ui_page__page3Menu">
+            <div class="ui_page__page3Menu">
+            <ul>
               <li><div class="ui_page__page3Item-1"></div><span></span>
                 <p>Система оповещения<br>о смене полосы<br>движения</p>
               </li>
@@ -154,13 +168,17 @@
                 <p>Приветственный<br>свет</p>
               </li>
             </ul>
+            <p class="ui_page__page3Menu-annotate">Познакомьтесь поближе с уникальными особенностями Lexus ES
+            <span class="ui_page__page3Menu-hook"></span>
+            </p>            
+            </div>
           </div>
         </div>
         <footer></footer>
     </section>
     <section class="row ui_page">
         <header></header>
-        <div id="four" data-js-scrollpos class="ui_page__content">
+        <div id="four" class="ui_page__content">
           <div class="ui_page__page4">
           <table>
             <tbody>
