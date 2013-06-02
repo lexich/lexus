@@ -40,52 +40,12 @@ module.exports = (grunt) ->
         cwd: "<%= components %>/requirejs/"
         dest: "<%= resource.js %>/lib/"
       ]
-      jquerytransit: files: [
-        flatten: true
-        expand: true
-        src: "jquery.transit.js"
-        cwd: "<%= components %>/jquery.transit/"
-        dest: "<%= resource.js %>/lib/"
-      ]
-      javascriptlibs: files: [
-        flatten: true
-        expand: true
-        src: "jquery.scrollpage.js"
-        cwd: "<%= components %>/javascript-libs/"
-        dest: "<%= resource.js %>/lib/"
-      ]
-      foundation: files:[
-        flatten: true
-        expand: true
-        src: "foundation.css"
-        cwd: "<%= components %>/foundation/css/"
-        dest: "<%= resource.css %>/"
-      ,
-        flatten: true
-        expand: true
-        src: "foundation.min.js"
-        cwd: "<%= components %>/foundation/js/"
-        dest: "<%= resource.js %>/lib/"
-      ]
       html: files:[
         flatten: true
         expand: true
         src: "*.html"
         cwd: "static/html/"
         dest: "<%= resource.path %>/"
-      ]
-      fontawesome: files:[
-        flatten: true
-        expand: true
-        src: ["font-awesome.min.css","font-awesome-ie7.min.css"]
-        cwd: "<%= components %>/font-awesome/build/assets/font-awesome/css/"
-        dest: "<%= resource.css %>/"
-      ,
-        flatten: true
-        expand: true
-        src: "*"
-        cwd: "<%= components %>/font-awesome/build/assets/font-awesome/font/"
-        dest: "<%= resource.font %>/"
       ]
       backboneunderscore:files:[
         flattern: true
