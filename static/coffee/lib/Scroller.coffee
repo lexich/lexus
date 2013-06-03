@@ -53,6 +53,14 @@ define ["jQuery","underscore","Backbone"],($, _, Backbone)->
         mTop = parseInt $(item).css("marginTop").replace("px","")
         $(item).data('parralax-top', mTop)
       @autoScroll()
+      @normalizeLayers()
+
+    normalizeLayers:->
+      max = 1920
+      _.each $("[class*='ui_layer-']"), (layer)->
+        offset = (max- $(layer).width()) / 2
+        offset = 0 if offset < 0
+        $(layer).css("background-position", "#{-offset}px 0px")
 
     scroll:(options)->
       from = parseInt options.from
