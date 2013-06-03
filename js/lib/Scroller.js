@@ -62,7 +62,22 @@ define(["jQuery", "underscore", "Backbone"], function($, _, Backbone) {
           mTop = parseInt($(item).css("marginTop").replace("px", ""));
           return $(item).data('parralax-top', mTop);
         });
-        return this.autoScroll();
+        this.autoScroll();
+        return this.normalizeLayers();
+      },
+      normalizeLayers: function() {
+        var max;
+
+        max = 1920;
+        return _.each($("[class*='ui_layer-']"), function(layer) {
+          var offset;
+
+          offset = (max - $(layer).width()) / 2;
+          if (offset < 0) {
+            offset = 0;
+          }
+          return $(layer).css("background-position", "" + (-offset) + "px 0px");
+        });
       },
       scroll: function(options) {
         var $anchor, duration, from, menuFrom, menuMove, menuTo, move, to, _ref,
